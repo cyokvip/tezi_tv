@@ -1,0 +1,88 @@
+#pos1{
+	height:40px;
+	width:40px;
+	float:left;
+	background:url(../images/iFrame_1.png);
+}
+#pos2{
+	height:40px;
+	float:left;
+	background:url(../images/iFrame_2.png);
+}
+#pos3{
+	height:40px;
+	width:40px;
+	float:left;
+	background:url(../images/iFrame_3.png);
+}
+#pos4{
+	width:40px;
+	float:left;
+	background:url(../images/iFrame_4.png);
+}
+#pos6{
+	width:40px;
+	float:left;
+	background:url(../images/iFrame_6.png);
+}
+#pos7{
+	height:60px;
+	width:40px;
+	float:left;
+	background:url(../images/iFrame_7.png);
+}
+#pos8{
+	height:25px !important;height:60px;
+	float:left;
+	background:url(../images/iFrame_8.png);
+	color: #666;
+	text-align:left;
+	font-size: 16px;
+	font-weight:bold;
+	padding-top:35px;
+}
+#pos9{
+	height:60px;
+	width:40px;
+	float:left;
+	cursor:pointer;
+	background:url(../images/iFrame_9.png);
+}
+
+#row{
+	float:left;
+}
+
+#windownbg {
+	width: 100%;
+	display: none;
+	background: #000; /*body-bg*/
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+#windown-box {
+	position: fixed;
+	_position: absolute; /*For IE 6.0*/
+}
+
+#windown-title {
+	float:left;
+}
+
+#windown-content {
+	color:#666;
+	float:left;
+	background:#fff;
+}
+#windown-content .loading {
+	margin-left: -8px;
+	margin-top: -8px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+
+

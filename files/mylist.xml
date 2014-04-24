@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<videolist>
+  <video>
+    <videoname>河北都市</videoname>
+    <link>http://live01.hebtv.com/channels/hebtv/video_channel_01/flv:800k/live</link>
+  </video>
+  <video>
+    <videoname>西安新闻综合</videoname>
+    <link>http://113.140.13.197/live/2011/03/03/DE9CFF32-E76C-11E0-BC3F-A10582DB7B64?fmt=x264_500k_flv</link>
+  </video>
+  <video>
+    <videoname>安徽影视</videoname>
+    <link>http://live02.ahtv.cn/channels/1502/500.flv/live</link>
+  </video> 
+</videolist>
