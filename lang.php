@@ -1,3 +1,6 @@
+<?php
+require_once('config.php');
+?>
 ﻿<?
 //Video/Audio/Photo/All
 $STR_Title = "媒体服务器";

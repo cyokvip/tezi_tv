@@ -1,4 +1,7 @@
 <?php
+require_once('config.php');
+?>
+<?php
 
 session_start();
 error_reporting(0);

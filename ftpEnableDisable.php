@@ -1,4 +1,7 @@
 <?php
+require_once('config.php');
+?>
+<?php
 
 error_reporting(0);
 include '/tmp/lang.php';

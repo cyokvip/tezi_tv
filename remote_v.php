@@ -1,4 +1,7 @@
 <?php
+require_once('config.php');
+?>
+<?php
 
 include "chooselang.php";
 include '/tmp/lang.php';

@@ -1,4 +1,7 @@
 <?php
+require_once('config.php');
+?>
+<?php
  
 include '/tmp/lang.php';
 $target_ver=file_get_contents("http://www.hdpfans.com/webversion.txt");

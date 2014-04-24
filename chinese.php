@@ -1,4 +1,7 @@
 <?php
+require_once('config.php');
+?>
+<?php
 echo '﻿';
 $STR_Title = "媒体服务器";
 $STR_Video_title = "视频";

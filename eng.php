@@ -1,4 +1,7 @@
 <?php
+require_once('config.php');
+?>
+<?php
 echo '﻿';
 $STR_Title = "HD Player Media Server";
 $STR_Video_title = "Movies";

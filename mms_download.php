@@ -1,4 +1,7 @@
 <?php
+require_once('config.php');
+?>
+<?php
  
 $file_name = "files/mylist.xml";
 $file = fopen($file_name,"r");

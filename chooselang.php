@@ -1,4 +1,7 @@
 <?php
+require_once('config.php');
+?>
+<?php
 
 if (file_exists("/usr/local/etc/dvdplayer/setup.txt") == false) {
 copy ("setup.txt","/usr/local/etc/dvdplayer/setup.txt");
