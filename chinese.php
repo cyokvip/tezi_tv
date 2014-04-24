@@ -279,6 +279,7 @@ $STR_NASStopped = "NAS(samba)模式已停止。";
 $STR_RebootConfirm = "你确定要重启播放器吗？";
 $STR_WebRunConfirm = "系统将会重启，启动后1分钟内开始播放该文件。（此功能后续版本再开放。）";
 $STR_OnlineUpdate = "在线更新";
+$STR_HACKHD = "hackhd";
 $STR_WebVersionStatus = "当前Web控制台版本：";
 $STR_Update = "更新";
 $STR_CheckVersion = "检查";

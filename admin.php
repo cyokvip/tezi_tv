@@ -55,6 +55,7 @@ echo 'cur';
 			<!--<div class="tag"><div id="';cur("net_favorites");;echo 'tag_l"></div><div id="';cur("net_favorites");;echo 'tag_m"><a href="admin.php?tag=net_favorites&tar=setup_net_favorites.php">';echo $STR_head_net_favorites;;echo '</a></div><div id="';cur("net_favorites");;echo 'tag_r"></div></div> -->
 			<div class="tag"><div id="';cur("setup_mms");;echo 'tag_l"></div><div id="';cur("setup_mms");;echo 'tag_m"><a href="admin.php?tag=setup_mms&tar=setup_mms.php">';echo $STR_setup_mms;;echo '</a></div><div id="';cur("setup_mms");;echo 'tag_r"></div></div>
 			<div class="tag"><div id="';cur("update");;echo 'tag_l"></div><div id="';cur("update");;echo 'tag_m"><a href="admin.php?tag=update&tar=setup_update.php">';echo $STR_OnlineUpdate;;echo '</a></div><div id="';cur("update");;echo 'tag_r"></div></div>
+			<div class="tag"><div id="';cur("hackhd");;echo 'tag_l"></div><div id="';cur("hackhd");;echo 'tag_m"><a href="hackhd.php">';echo $STR_HACKHD;;echo '</a></div><div id="';cur("hackhd");;echo 'tag_r"></div></div>
 
 			<div class="tag_down"></div>
 		</div>
